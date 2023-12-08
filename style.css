@@ -16,11 +16,13 @@ body {
     --cards-background: rgb(24, 24, 24);
     --text-color: white;
     --body-background: rgb(0, 0, 0);
+    --blury-background: rgba(0, 0, 0, 0.109);
 }
 
 :root {
     --primary-color: #9300ff;
-    --scroll-primary-colors: rgba(170, 50, 255, 0.498);
+    --scroll-primary-colors: rgba(170, 50, 255, 0.5);
+    --blury-background: rgba(255, 255, 255, 0.109);
     --body-background: white;
     --cards-background: #eee;
     --text-color: black;
@@ -48,9 +50,9 @@ body {
     width: 100vw;
     height: 10vw;
     display: grid;
-    grid-template-columns: 10% 65% 25%;
+    grid-template-columns: 10% 60% 30%;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .logo {
@@ -74,6 +76,8 @@ body {
     box-sizing: border-box;
     font-size: 18px;
     border: 2px solid var(--primary-color);
+    background-color: var(--cards-background);
+    color: var(--text-color);
     text-indent: 10px;
     font-family: 'Readex Pro', sans-serif;
 }
@@ -82,6 +86,8 @@ body {
     width: 100px;
     height: 50px;
     border: 2px solid var(--primary-color);
+    background-color: var(--cards-background);
+    color: var(--text-color);
     font-size: 16px;
     outline: none;
     text-align: center;
@@ -120,7 +126,8 @@ body {
     display: grid;
     grid-template-columns: repeat(2, 70px) auto;
     column-gap: 40px;
-    place-items: center;
+    place-content: center;
+    justify-content: flex-start
 }
 
 .extra>* {
@@ -144,7 +151,7 @@ body {
     background-color: var(--primary-color);
     color: white;
     border-radius: 50%;
-    border: 3px solid white;
+    border: 3px solid var(--body-background);
 }
 
 .signTxt {
@@ -259,6 +266,7 @@ body {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    overflow: visible;
 }
 
 .ex {
@@ -440,7 +448,8 @@ body {
 }
 
 .cardOption.active:hover {
-    background-color: #9500ffc0;
+    background-color: var(--primary-color);
+    backdrop-filter: opacity(0.75);
     cursor: not-allowed;
 }
 
@@ -517,7 +526,7 @@ body {
 
 .account.active:hover {
     color: var(--primary-color);
-    background-color: white;
+    background-color: var(--cards-background);
     border-color: var(--primary-color);
     border-radius: 0;
 }
@@ -540,7 +549,7 @@ body {
     justify-content: space-evenly;
     position: absolute;
     align-items: center;
-    background-color: white;
+    background-color: var(--cards-background);
     top: calc(100% + 3px);
     z-index: 5;
     transition: var(--transition);
@@ -568,9 +577,9 @@ body {
 
 .settings:hover,
 .logout:hover {
-    color: white;
+    color: var(--text-color);
     background-color: var(--primary-color);
-    border-color: white;
+    border-color: var(--cards-background);
 }
 
 .darkBg {
@@ -872,7 +881,8 @@ body {
     width: 400px;
     min-height: 70px;
     height: fit-content;
-    background-color: #9500ffbf;
+    background-color: var(--primary-color);
+    backdrop-filter: opacity(0.75);
     border: 3px solid var(--primary-color);
     color: white;
     position: fixed;
@@ -910,9 +920,128 @@ body {
     font-size: 20px;
 }
 
-.appSvg,
 .nav {
     display: none;
+}
+
+.appSvgCont {
+    width: 50px;
+    height: 100%;
+    position: relative;
+}
+
+.appSvg {
+    width: 100%;
+    min-width: 50px;
+    max-width: 70px;
+    stroke: var(--text-color);
+    fill: none;
+    opacity: 0;
+    margin-left: 20px;
+    transition: var(--transition);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.appSvg.active {
+    opacity: 1;
+}
+
+.settingsContainer {
+    width: 300px;
+    height: 100%;
+    position: fixed;
+    left: 100%;
+    top: 0%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(7, calc(100%/7));
+    background-color: var(--blury-background);
+    backdrop-filter: blur(15px);
+    border: 3px solid var(--primary-color);
+    transition: var(--transition);
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.settingsContainer.active {
+    left: calc(100% - 300px);
+}
+
+.settingPc {
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    color: var(--text-color);
+    position: relative;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.setting::before {
+    content: '';
+    width: 0%;
+    height: 100%;
+    background-color: var(--primary-color);
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.setting:hover::before {
+    width: 100%;
+}
+
+.settingTitle {
+    background-color: var(--cards-background);
+    font-size: 25px;
+}
+
+.settingTitle:hover {
+    background-color: var(--cards-background);
+    color: var(--primary-color);
+}
+
+.themesContainer {
+    width: 35%;
+    height: 90%;
+    background-color: var(--cards-background);
+    color: var(--text-color);
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 15;
+    display: none;
+    place-content: center;
+    overflow: visible;
+}
+
+.themesContainer.active {
+    display: grid;
+    grid-template-columns: 80%;
+    grid-template-rows: 20% 80%;
+}
+
+.themesTxt {
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.themesColors {
+    display: grid;
+    grid-template-columns: repeat(3, 28%);
+    grid-template-rows: repeat(3, 23%);
+    gap: 3%;
+    place-content: center;
+    overflow: visible;
 }
 
 @media (min-width:320px) and (max-width:480px) {
@@ -927,7 +1056,7 @@ body {
     .navBar {
         width: 0;
         height: 100vh;
-        background-color: rgba(255, 255, 255, 0.109);
+        background-color: var(--blury-background);
         color: var(--text-color);
         font-size: 25px;
         position: fixed;
@@ -1153,4 +1282,65 @@ body {
         place-content: center;
         overflow: visible;
     }
+
+    .notification.active {
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    .account.active {
+        width: 100%;
+        height: 90%;
+        background: unset;
+        padding: 0;
+        border-radius: unset;
+        overflow: hidden;
+    }
+
+    .account.active:hover {
+        border: unset;
+    }
+
+    .accountName {
+        font-size: 25px;
+        white-space: nowrap;
+    }
+
+    .cardOptions {
+        bottom: 100px;
+        background-color: var(--cards-background);
+        border-radius: 0;
+    }
+
+    .cardOption {
+        position: relative;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    .cardOption.active:hover>* {
+        fill: var(--primary-color);
+    }
+
+    .cardOption.active:hover {
+        background-color: transparent;
+    }
+
+    .cardOption.active {
+        opacity: .3;
+    }
+
+    .itemsCard:hover {
+        transform: scale(1);
+    }
+
+    /* .cardOption.active::before{
+        content: '';
+        width: 3px;
+        height: 100px;
+        background-color: var(--primary-color);
+        position: absolute;
+        transform: rotate(45deg);
+        border-radius: var(--border-raduis);
+    } */
 }

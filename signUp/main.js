@@ -2,10 +2,15 @@ document.querySelector(".forgotPassword").onclick = () => location.pathname = "/
 const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 document.querySelector(".submit").onclick = () => {
     if (emailRegex.test(document.querySelector(".emailInput").value) === false) {
-        document.querySelector(".error").innerHTML = "استخدم بريد إلكتروني صالح";
+        document.querySelector(".error").innerHTML = "Use a valid email";
         document.querySelector(".error").classList.add("active");
         setTimeout(() => document.querySelector(".error").classList.remove("active"),5000);
-
+        return;
+    }
+    if (document.querySelector(".usernameInput").value == "") {
+        document.querySelector(".error").innerHTML = "Username is required";
+        document.querySelector(".error").classList.add("active");
+        setTimeout(() => document.querySelector(".error").classList.remove("active"),5000);
         return;
     }
     const data = {

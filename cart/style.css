@@ -2,24 +2,37 @@ body {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    background-color: var(--body-background);
     font-family: 'Readex Pro', sans-serif;
     overflow-x: hidden;
+    color: var(--text-color);
+}
+
+.darkMode {
+    --cards-background: rgb(24, 24, 24);
+    --text-color: white;
+    --body-background: rgb(0, 0, 0);
 }
 
 :root {
-    --background-colors: #9300ff;
-    --scroll-background-colors: rgba(170, 50, 255, 0.498);
+    --danger-color: #ff2525;
+    --primary-color: #9300ff;
+    --scroll-primary-colors: rgba(170, 50, 255, 0.498);
+    --body-background: white;
+    --cards-background: #eee;
+    --text-color: black;
     --transition: .3s ease;
     --border-raduis: 15px;
 }
 
 ::-webkit-scrollbar {
-    background-color: var(--scroll-background-colors);
+    background-color: var(--scroll-primary-colors);
     width: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--background-colors);
+    background-color: var(--primary-color);
+    border-radius: 10px;
 }
 
 .header {
@@ -36,7 +49,7 @@ body {
 .logo {
     width: 100px;
     height: 100px;
-    background-color: var(--background-colors);
+    background-color: var(--primary-color);
     border-radius: 50%;
 }
 
@@ -52,7 +65,7 @@ body {
     width: 60%;
     height: 40px;
     border-radius: var(--border-raduis);
-    border: 3px solid var(--background-colors);
+    border: 3px solid var(--primary-color);
     outline: none;
     font-family: 'Readex Pro', sans-serif;
     font-size: 14px;
@@ -65,7 +78,7 @@ body {
 .searchBtn {
     width: 100px;
     height: 40px;
-    background-color: var(--background-colors);
+    background-color: var(--primary-color);
     color: white;
     border: 3px solid;
     display: flex;
@@ -81,8 +94,8 @@ body {
 
 .searchBtn:hover {
     background-color: transparent;
-    border-color: var(--background-colors);
-    color: var(--background-colors);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
 }
 
 .container {
@@ -157,7 +170,7 @@ body {
     height: fit-content;
     box-sizing: border-box;
     color: white;
-    background-color: #ff2525;
+    background-color: var(--danger-color);
     border: 3px solid;
     border-color: transparent;
     border-radius: var(--border-raduis);
@@ -173,8 +186,8 @@ body {
 .removeAll:hover,
 .removeSelcted:hover {
     background-color: transparent;
-    border-color: #ff2525;
-    color: #ff2525;
+    border-color: var(--danger-color);
+    color: var(--danger-color);
     border-radius: 0;
 }
 
@@ -194,7 +207,7 @@ body {
     appearance: none;
     width: 20px;
     height: 20px;
-    border: 2px solid var(--background-colors);
+    border: 2px solid var(--primary-color);
     border-radius: 4px;
     position: relative;
     transition: var(--transition);
@@ -238,7 +251,7 @@ body {
 }
 
 .title {
-    color: var(--background-colors);
+    color: var(--primary-color);
     font-weight: bold;
     font-size: 20px;
 }
@@ -272,7 +285,7 @@ body {
     border-radius: 25px;
     border: 3px solid;
     border-color: transparent;
-    background-color: var(--background-colors);
+    background-color: var(--primary-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -285,8 +298,8 @@ body {
 
 .submit:hover {
     background-color: transparent;
-    border-color: var(--background-colors);
-    color: var(--background-colors);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
     border-radius: 0;
 }
 
@@ -313,7 +326,7 @@ body {
     appearance: none;
     width: 20px;
     height: 20px;
-    border: 2px solid var(--background-colors);
+    border: 2px solid var(--primary-color);
     border-radius: 4px;
     position: relative;
     transition: var(--transition);
@@ -380,7 +393,7 @@ body {
 .removeItem {
     box-sizing: border-box;
     color: white;
-    background-color: #ff2525;
+    background-color: var(--danger-color);
     border: 3px solid;
     border-color: transparent;
     border-radius: var(--border-raduis);
@@ -394,8 +407,8 @@ body {
 
 .removeItem:hover {
     background-color: transparent;
-    border-color: #ff2525;
-    color: #ff2525;
+    border-color: var(--danger-color);
+    color: var(--danger-color);
     border-radius: 0;
 }
 
@@ -422,7 +435,7 @@ body {
     top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    color: #ff2525;
+    color: var(--danger-color);
     font-size: 20px;
     font-weight: bold;
 }
@@ -463,28 +476,28 @@ body {
 }
 
 .warningYes {
-    background-color: #ff2525;
+    background-color: var(--danger-color);
     color: white;
 }
 
 .warningYes:hover {
-    color: #ff2525;
-    border-color: #ff2525;
+    color: var(--danger-color);
+    border-color: var(--danger-color);
     border-radius: 0;
     background-color: white;
 }
 
 .warningNo {
     background-color: transparent;
-    color: var(--background-colors);
-    border-color: var(--background-colors);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
 }
 
 .warningNo:hover {
     color: white;
     border-color: transparent;
     border-radius: 0;
-    background-color: var(--background-colors);
+    background-color: var(--primary-color);
 }
 
 .darkBg {
@@ -496,4 +509,85 @@ body {
     height: 100vh;
     background-color: #000000ba;
     z-index: 2;
+}
+
+@media (min-width:320px) and (max-width:480px) {
+    .container {
+        grid-template-columns: 1fr;
+        column-gap: 0;
+    }
+
+    .containerTop {
+        width: 100%;
+        grid-template-columns: 47.5% 47.5%;
+        column-gap: 5%;
+    }
+
+    .itemsStuff {
+        grid-template-columns: 100%;
+        right: 0;
+    }
+
+    .options>*,
+    .action>* {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 16px;
+    }
+
+    .action>* {
+        font-size: 12px;
+    }
+
+    .options,
+    .action {
+        grid-template-rows: 50% 50%;
+        align-items: center;
+    }
+
+    .itemImage {
+        width: 90%;
+        height: 70%;
+        right: 50%;
+        top: 5%;
+        transform: translate(50%, 0);
+    }
+
+    .itemName {
+        right: unset;
+        left: 5%;
+        top: 75%;
+    }
+
+    .removeItem {
+        bottom: 5%;
+        left: unset;
+        right: 5%;
+    }
+
+    .itemPrice {
+        right: unset;
+        left: 5%;
+        font-size: 25px;
+    }
+
+    .cBoxContainer {
+        top: 78%;
+        right: 5%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .cBoxContainer::before {
+        content: 'Select';
+        font-size: 20px;
+        color: var(--primary-color);
+    }
+
+    .cBox {
+        width: 30px;
+        height: 30px;
+    }
 }

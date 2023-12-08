@@ -1,3 +1,6 @@
+window.onload = e => {
+    if (localStorage.getItem("account") == 'true') document.querySelector(".accountOptions").style.width = document.querySelector(".account").clientWidth + "px";
+};
 let cartItemsAmount,savesItemsAmount;
 function checkCartItems() {
     if (document.querySelectorAll(".itemImage").length > 0) {
@@ -12,6 +15,26 @@ function checkCartItems() {
         return;
     }
 }
+
+function hexToRgba(hex,alpha) {
+    let r,g,b;
+
+    r = parseInt(hex.slice(1,3),16);
+    g = parseInt(hex.slice(3,5),16);
+    b = parseInt(hex.slice(5,7),16);
+
+    return `(${r},${g},${b},${alpha})`;
+}
+
+if (localStorage.getItem("themeColor")) {
+    document.body.style.cssText = `--primary-color: ${localStorage.getItem("themeColor")};--scroll-primary-colors: rgba${hexToRgba(localStorage.getItem("themeColor"),0.5)}`;
+}
+if (localStorage.getItem("mode") == "dark") {
+    document.querySelector(".moon").classList.add("active");
+    document.body.classList.toggle("darkMode");
+}
+else document.querySelector(".sun").classList.add("active");
+
 
 function checkSavesItems() {
     if (document.querySelectorAll(".itemImage").length > 0) {
@@ -110,8 +133,7 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
                 return JSON.parse(res);
             }).then(res => {
                 for (const i in res.items) inCart.push(res.items[i].imageUrl);
-                if (localStorage.getItem("account"))
-                    cartItemsAmount = res.items.length;
+                if (localStorage.getItem("account") == 'true') cartItemsAmount = res.items.length;
                 document.querySelector(".extraTxt.cartTxt").innerHTML = res.items.length;
             });
 
@@ -127,7 +149,7 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
                 return JSON.parse(res);
             }).then(res => {
                 for (const i in res.items) inSaves.push(res.items[i].imageUrl);
-                if (localStorage.getItem("account"))
+                if (localStorage.getItem("account") == 'true')
                     savesItemsAmount = res.items.length;
                 document.querySelector(".extraTxt.saveTxt").innerHTML = res.items.length;
             });
@@ -183,7 +205,6 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
                             let opt = document.createElement("option");
                             opt.value = el;
                             opt.innerHTML = el;
-                            console.log(el);
                             colorsSelect.appendChild(opt);
                         });
 
@@ -222,7 +243,7 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
                                 addToCart(data);
                                 cartItemsAmount++;
                                 document.querySelector(".cartTxt").innerHTML = cartItemsAmount;
-                            }
+                            } else notification("this item is already in cart");
                         } else notification("you must sign in or sign up before adding items to Cart");
                     };
                 });
@@ -283,7 +304,7 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
                                 addToSaved(data);
                                 savesItemsAmount++;
                                 document.querySelector(".saveTxt").innerHTML = savesItemsAmount;
-                            };
+                            } else notification("this item is already in wish list");
                         } else notification("you must sign in or sign up before adding items to wish list");
                     };
                 });
@@ -293,13 +314,80 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
         // document.querySelector(".newContainer").style.cssText = `grid-template-rows: repeat(${Math.ceil(products.length / 3)},600px);`;
     });
 
-document.querySelector(".sign-in").onclick = () => location.pathname = "/signIn";
-document.querySelector(".sign-up").onclick = () => location.pathname = "/signUp";
-if (localStorage.getItem("account")) {
+document.querySelector(".sign-in").onclick = () => location.pathname = "/Port Website/signIn";
+document.querySelector(".sign-up").onclick = () => location.pathname = "/Port Website/signUp";
+
+if (localStorage.getItem("account") == 'true') {
     const account = document.querySelector(".account");
     const accountName = document.querySelector(".accountName");
     accountName.innerHTML = localStorage.getItem("username");
-    document.querySelector(".settings").onclick = () => location.pathname = "/account";
+
+    document.querySelector(".appSvgCont").appendChild(document.querySelector(".moon"));
+    document.querySelector(".appSvgCont").appendChild(document.querySelector(".sun"));
+    document.querySelector(".settings").onclick = () => {
+        document.querySelector(".settingsContainer").classList.add("active");
+        document.onclick = e => {
+            if (e.target == document.querySelector(".settings")) return;
+            for (const el in document.querySelector(".settingsContainer").childNodes) if (document.querySelector(".settingsContainer").childNodes[el] == e.target) return;
+            console.log(e.target);
+            document.querySelector(".settingsContainer").classList.remove("active");
+        };
+    };
+    let appearence = document.querySelector(".settingAppearence");
+    appearence.onclick = e => {
+        document.querySelector(".moon").classList.toggle("active");
+        document.querySelector(".sun").classList.toggle("active");
+        document.body.classList.toggle("darkMode");
+        localStorage.getItem("mode") == "dark" ? localStorage.setItem("mode","light") : localStorage.setItem("mode","dark");
+    };
+    let themes = document.querySelector(".settingTheme");
+
+    let themesContainer = document.createElement("div");
+    themesContainer.classList.add("themesContainer");
+
+    let themesTxt = document.createElement("div");
+    themesTxt.classList.add("themesTxt");
+    themesTxt.innerHTML = "Choose a color:";
+
+    let themesColors = document.createElement("div");
+    themesColors.classList.add("themesColors");
+
+    themesContainer.appendChild(themesTxt);
+    themesContainer.appendChild(themesColors);
+    document.body.appendChild(themesContainer);
+
+    let colors = ["#9300ff","#0cff77","#006fff","#e27","#FFD700","#228B22","#FF6F61","#4169E1","#FF4500"];
+
+    colors.forEach(e => {
+        let color = document.createElement("div");
+        color.classList.add(".themeColor");
+        color.style.backgroundColor = e;
+        color.style.boxShadow = `0 0 5px 0px ${e}`;
+        color.style.cursor = "pointer";
+
+        color.onclick = el => {
+            document.body.style.cssText = `--primary-color: ${e};--scroll-primary-colors: rgba${hexToRgba(e,0.5)}`;
+            localStorage.setItem("themeColor",e);
+            themesContainer.classList.remove("active");
+            document.querySelector(".darkBg").classList.remove("active");
+            document.querySelector(".darkBg").style.zIndex = -1;
+        };
+
+        themesColors.appendChild(color);
+    });
+
+    themes.onclick = e => {
+        document.querySelector(".settingsContainer").classList.remove("active");
+        themesContainer.classList.add("active");
+        document.querySelector(".darkBg").classList.add("active");
+        document.querySelector(".darkBg").style.zIndex = 2;
+    };
+    /*
+    chatbot (support)
+    theme
+    appearence
+    language
+    */
     document.querySelector(".logout").onclick = () => {
         localStorage.clear();
         location.reload();
@@ -319,7 +407,9 @@ document.querySelector(".close").onclick = e => {
 };
 document.querySelector(".darkBg").onclick = e => {
     document.querySelector(".darkBg").classList.remove("active");
+    document.querySelector(".darkBg").style.cssText = '';
     document.querySelector(".darkBg").style.zIndex = -1;
+    document.querySelector(".themesContainer").classList.remove("active");
     document.querySelector(".itemView").classList.remove("active");
     document.querySelector(".itemView").style.zIndex = -1;
     if (screen.availWidth < 480) document.querySelector(".navBar").classList.remove("active");
@@ -360,9 +450,16 @@ function notification(msg) {
         document.querySelector(".notification").classList.remove("active");
     },3000);
 }
+document.body.removeChild(document.querySelector(".hotDeals"));
 
 // media queries stuff
-if (screen.availWidth < 480) {
+window.onresize = e => {
+    if (screen.availWidth < 480) {
+        mobileMode();
+    }
+};
+
+function mobileMode() {
     let appearence = document.querySelector(".appearence");
     let themes = document.querySelector(".themes");
     let setting = document.querySelector(".setting");
@@ -370,31 +467,30 @@ if (screen.availWidth < 480) {
     navBar.classList.add("navBar");
     document.body.appendChild(navBar);
 
-    if (localStorage.getItem("themeColor")) {
-        document.body.style.cssText = `--primary-color: ${localStorage.getItem("themeColor")}`;
-    }
-    if (localStorage.getItem("mode") == "dark") {
-        document.querySelector(".moon").classList.add("active");
-        document.body.classList.toggle("darkMode");
-    }
-    else document.querySelector(".sun").classList.add("active");
-
     appearence.onclick = e => {
         document.querySelector(".moon").classList.toggle("active");
         document.querySelector(".sun").classList.toggle("active");
         document.body.classList.toggle("darkMode");
         localStorage.getItem("mode") == "dark" ? localStorage.setItem("mode","light") : localStorage.setItem("mode","dark");
     };
+    if (document.querySelector(".account")) {
+        let userAccount = document.querySelector(".account");
+        userAccount.onclick = () => location.pathname = "/account";
+    }
+
 
     let themesContainer = document.createElement("div");
     themesContainer.classList.add("themesContainer");
+
 
     let themesTxt = document.createElement("div");
     themesTxt.classList.add("themesTxt");
     themesTxt.innerHTML = "Choose a color:";
 
+
     let themesColors = document.createElement("div");
     themesColors.classList.add("themesColors");
+
 
     themesContainer.appendChild(themesTxt);
     themesContainer.appendChild(themesColors);
@@ -402,19 +498,23 @@ if (screen.availWidth < 480) {
 
     let colors = ["#9300ff","#0cff77","#006fff","#e27","#FFD700","#228B22","#FF6F61","#4169E1","#FF4500"];
 
+
     colors.forEach(e => {
         let color = document.createElement("div");
         color.classList.add(".themeColor");
         color.style.backgroundColor = e;
+        color.style.boxShadow = `0 0 5px 0px ${e}`;
+
 
         color.onclick = el => {
-            document.body.style.cssText = `--primary-color: ${e}`;
+            document.body.style.cssText = `--primary-color: ${e};--scroll-primary-colors: rgba${hexToRgba(e,0.5)}`;
             localStorage.setItem("themeColor",e);
             themesContainer.classList.remove("active");
             document.querySelector(".navBar").classList.remove("active");
             document.querySelector(".darkBg").classList.remove("active");
             document.querySelector(".darkBg").style.zIndex = 0;
         };
+
 
         themesColors.appendChild(color);
     });
@@ -425,12 +525,14 @@ if (screen.availWidth < 480) {
         document.querySelector(".darkBg").style.zIndex = 2;
     };
 
+
     navBar.appendChild(document.querySelector(".extra.ctr"));
     navBar.appendChild(setting);
     navBar.appendChild(appearence);
     navBar.appendChild(themes);
     document.body.removeChild(document.querySelector(".header"));
     document.querySelector(".sections").removeChild(document.querySelector(".moreFilters"));
+
 
     let cartTxt = document.createElement("div");
     cartTxt.innerHTML = "Cart ";
@@ -444,6 +546,13 @@ if (screen.availWidth < 480) {
     accountTxt.innerHTML = "Sign Up";
     document.querySelector(".signUp").appendChild(accountTxt);
 
+    document.querySelectorAll(".cardOption1").forEach(e => {
+        e.classList.contains("active");
+    });
+    document.querySelectorAll(".cardOption3").forEach(e => {
+        e.classList.contains("active");
+    });
+
     function gridCounter() {
         if (c.length > 0) {
             document.querySelector(".container").style.cssText = `grid-template-rows: 2150px 600px ${c.length * 650 + 150}px; height: fit-content;`;
@@ -454,29 +563,34 @@ if (screen.availWidth < 480) {
     document.querySelector(".store").onclick = e => {
         scroll(0,2895);
     };
+
+
+
+    let touchStartX,touchEndX;
+    document.addEventListener('touchstart',(e) => {
+        touchStartX = e.touches[0].clientX;
+    });
+
+    document.addEventListener('touchend',(e) => {
+        touchEndX = e.changedTouches[0].clientX;
+
+        if (touchEndX - touchStartX > 100) openNav();
+        if (touchStartX - touchEndX > 100) closeNav();
+    });
+    function openNav() {
+        document.querySelector(".navBar").classList.add("active");
+        document.querySelector(".darkBg").classList.add("active");
+        document.querySelector(".darkBg").style.cssText = 'width:25vw;left:75vw;';
+        document.querySelector(".darkBg").style.zIndex = 2;
+
+    }
+    function closeNav() {
+        document.querySelector(".navBar").classList.remove("active");
+        document.querySelector(".darkBg").classList.remove("active");
+        document.querySelector(".darkBg").style.cssText = '';
+        document.querySelector(".darkBg").style.zIndex = 1;
+    }
 }
-
-let touchStartX,touchEndX;
-document.addEventListener('touchstart',(e) => {
-    touchStartX = e.touches[0].clientX;
-});
-
-document.addEventListener('touchend',(e) => {
-    touchEndX = e.changedTouches[0].clientX;
-
-    if (touchEndX - touchStartX > 100) openNav();
-    if (touchStartX - touchEndX > 100) closeNav();
-});
-function openNav() {
-    document.querySelector(".navBar").classList.add("active");
-    document.querySelector(".darkBg").classList.add("active");
-    document.querySelector(".darkBg").style.cssText = 'width:25vw;left:75vw;';
-    document.querySelector(".darkBg").style.zIndex = 2;
-
-}
-function closeNav() {
-    document.querySelector(".navBar").classList.remove("active");
-    document.querySelector(".darkBg").classList.remove("active");
-    document.querySelector(".darkBg").style.cssText = '';
-    document.querySelector(".darkBg").style.zIndex = 1;
+if (screen.availWidth < 480) {
+    mobileMode();
 }

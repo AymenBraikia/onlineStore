@@ -2,26 +2,37 @@ body {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    background-color: var(--body-background);
     font-family: 'Readex Pro', sans-serif;
     overflow-x: hidden;
+    color: var(--text-color);
+}
+
+.darkMode {
+    --cards-background: rgb(24, 24, 24);
+    --text-color: white;
+    --body-background: rgb(0, 0, 0);
 }
 
 :root {
-    --background-colors: #9300ff;
-    --scroll-background-colors: rgba(170, 50, 255, 0.498);
+    --primary-color: #9300ff;
+    --scroll-primary-colors: rgba(170, 50, 255, 0.498);
+    --body-background: white;
+    --cards-background: #eee;
+    --text-color: black;
     --transition: .3s ease;
     --border-raduis: 15px;
 }
 
 ::-webkit-scrollbar {
-    background-color: var(--scroll-background-colors);
+    background-color: var(--scroll-primary-colors);
     width: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--background-colors);
+    background-color: var(--primary-color);
+    border-radius: 10px;
 }
-
 .container {
     position: absolute;
     left: 50%;
@@ -29,7 +40,7 @@ body {
     transform: translate(-50%, -50%);
     width: 500px;
     height: 80vh;
-    border: 3px solid var(--background-colors);
+    border: 3px solid var(--primary-color);
     border-radius: var(--border-raduis);
 }
 
@@ -43,12 +54,12 @@ body {
     width: fit-content;
     height: fit-content;
     padding: 5px 10px;
-    border: 3px solid var(--background-colors);
+    border: 3px solid var(--primary-color);
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
-    color: var(--background-colors);
+    color: var(--primary-color);
     font-weight: bold;
     font-size: 18px;
     border-radius: var(--border-raduis);
@@ -91,7 +102,7 @@ body {
 }
 
 .input:focus {
-    border-color: var(--background-colors);
+    border-color: var(--primary-color);
 }
 
 .submit {
@@ -99,7 +110,7 @@ body {
     top: 80%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--background-colors);
+    background-color: var(--primary-color);
     color: white;
     width: 80%;
     height: 50px;
@@ -115,9 +126,9 @@ body {
 }
 
 .submit:hover {
-    border-color: var(--background-colors);
+    border-color: var(--primary-color);
     background-color: white;
-    color: var(--background-colors);
+    color: var(--primary-color);
 }
 
 .forgotPassword {
@@ -129,7 +140,7 @@ body {
 }
 
 .forgotPassword:hover {
-    color: var(--background-colors);
+    color: var(--primary-color);
 }
 
 .error {

@@ -2,26 +2,37 @@ body {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    background-color: var(--body-background);
     font-family: 'Readex Pro', sans-serif;
     overflow-x: hidden;
+    color: var(--text-color);
+}
+
+.darkMode {
+    --cards-background: rgb(24, 24, 24);
+    --text-color: white;
+    --body-background: rgb(0, 0, 0);
 }
 
 :root {
-    --background-colors: #9300ff;
-    --scroll-background-colors: rgba(170, 50, 255, 0.498);
+    --primary-color: #9300ff;
+    --scroll-primary-colors: rgba(170, 50, 255, 0.498);
+    --body-background: white;
+    --cards-background: #eee;
+    --text-color: black;
     --transition: .3s ease;
     --border-raduis: 15px;
 }
 
 ::-webkit-scrollbar {
-    background-color: var(--scroll-background-colors);
+    background-color: var(--scroll-primary-colors);
     width: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--background-colors);
+    background-color: var(--primary-color);
+    border-radius: 10px;
 }
-
 .header {
     background-color: #eee;
     position: absolute;
@@ -335,10 +346,11 @@ body {
     font-weight: bold;
 }
 
-.containerRight.active{
+.containerRight.active {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0;
     height: 100px;
 }
+
