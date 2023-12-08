@@ -1,0 +1,147 @@
+body {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Readex Pro', sans-serif;
+    overflow-x: hidden;
+}
+
+:root {
+    --background-colors: #9300ff;
+    --scroll-background-colors: rgba(170, 50, 255, 0.498);
+    --transition: .3s ease;
+    --border-raduis: 15px;
+}
+
+::-webkit-scrollbar {
+    background-color: var(--scroll-background-colors);
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--background-colors);
+}
+
+.container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 80vh;
+    border: 3px solid var(--background-colors);
+    border-radius: var(--border-raduis);
+}
+
+.container2 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.title {
+    width: fit-content;
+    height: fit-content;
+    padding: 5px 10px;
+    border: 3px solid var(--background-colors);
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    color: var(--background-colors);
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: var(--border-raduis);
+}
+
+.inputs {
+    width: 80%;
+    height: 60%;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+}
+
+.inputs>* {
+    width: 100%;
+    height: 65px;
+    text-indent: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    position: relative;
+}
+
+.input {
+    width: 100%;
+    height: 30px;
+    border: 2px solid black;
+    outline: none;
+    font-size: 20px;
+    border-radius: var(--border-raduis);
+    text-indent: 10px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.input:focus {
+    border-color: var(--background-colors);
+}
+
+.submit {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--background-colors);
+    color: white;
+    width: 80%;
+    height: 50px;
+    display: grid;
+    place-content: center;
+    border-radius: var(--border-raduis);
+    font-size: 20px;
+    box-sizing: border-box;
+    border: 3px solid;
+    border-color: transparent;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.submit:hover {
+    border-color: var(--background-colors);
+    background-color: white;
+    color: var(--background-colors);
+}
+
+.forgotPassword {
+    position: absolute;
+    bottom: -20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.forgotPassword:hover {
+    color: var(--background-colors);
+}
+
+.error {
+    position: absolute;
+    left: 50%;
+    top: 8%;
+    transform: translateX(-50%);
+    color: transparent;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.error.active {
+    color: red;
+}

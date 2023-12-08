@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اعدادات الحساب</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="creationDate"></div>
+        <div class="lable">اسم المستخدم</div>
+        <input class="input username" type="text">
+        <div class="lable">البريد الالكتروني</div>
+        <input class="input email" type="email">
+        <div class="lable">كلمة السر</div>
+        <input class="input password" type="password">
+        <!-- <select class="language">
+            <option value="">العربية</option>
+            <option value="">english</option>
+            <option value="">française</option>
+        </select> -->
+        <div class="theme">
+            <div class="titleT">المظهر :</div>
+            <div class="dark">مظلم</div>
+            <div class="light">فاتح</div>
+        </div>
+        <div class="address">
+            <div class="title">العنوان</div>
+            <select class="city">
+                <option value="">اختر ولايتك</option>
+            </select>
+            <input type="text" placeholder="عنوان الشارع" class="street">
+            <input type="number" placeholder="رقم المنزل" class="houseNumber">
+        </div>
+        <div class="save">حفظ التغييرات</div>
+        <div class="deleteAccount">حذف الحساب</div>
+    </div>
+    <script src="./main.js"></script>
+</body>
+
+</html>

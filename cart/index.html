@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="logo"></div>
+        <div class="search">
+            <input type="text" placeholder="Search For Product" class="searchInp">
+            <div class="searchBtn">Search</div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="itemsStuff">
+            <div class="containerTop">
+                <div class="options">
+                    <div class="cartItems">Products Count: </div>
+                    <div class="select">
+                        <label for="selectCheck">Select All Products</label>
+                        <input type="checkbox" class="checkbox" name="" id="selectCheck">
+                    </div>
+                </div>
+                <div class="action">
+                    <div class="removeAll">Remove All Products</div>
+                    <div class="removeSelcted">Remove Selected Products</div>
+                </div>
+            </div>
+            <div class="itemsContainer"></div>
+        </div>
+        <div class="purchaseStuff">
+            <div class="title">Summary</div>
+            <div class="price">
+                <div class="txt">Sub Total</div>
+                <div class="priceValue">$<div class="value">0.00</div>
+                </div>
+            </div>
+            <div class="actions">
+                <div class="submit">Check Out</div>
+            </div>
+        </div>
+    </div>
+    <div class="warning">
+        <div class="warningCont">
+            <div class="warningTitle">Remove</div>
+            <div class="warningTxt">Are you sure you want to remove this product ?</div>
+            <div class="warningOptions">
+                <div class="warningOption warningYes">Remove</div>
+                <div class="warningOption warningNo">Cancel</div>
+            </div>
+        </div>
+    </div>
+    <div class="darkBg"></div>
+    <script src="./main.js"></script>
+</body>
+
+</html>
