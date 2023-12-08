@@ -530,7 +530,7 @@ function mobileMode() {
     navBar.appendChild(setting);
     navBar.appendChild(appearence);
     navBar.appendChild(themes);
-    document.body.removeChild(document.querySelector(".header"));
+    if(document.querySelector(".header"))document.body.removeChild(document.querySelector(".header"));
     document.querySelector(".sections").removeChild(document.querySelector(".moreFilters"));
 
 
