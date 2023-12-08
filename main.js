@@ -450,6 +450,7 @@ function notification(msg) {
         document.querySelector(".notification").classList.remove("active");
     },3000);
 }
+if(screen.availWidth >480)
 document.body.removeChild(document.querySelector(".hotDeals"));
 
 // media queries stuff
@@ -588,7 +589,6 @@ function mobileMode() {
         document.querySelector(".darkBg").style.cssText = '';
         document.querySelector(".darkBg").style.zIndex = 1;
     }
-    console.log("?");
 }
 if (screen.availWidth < 480) {
     mobileMode();
