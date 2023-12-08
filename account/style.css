@@ -9,6 +9,7 @@ body {
     font-family: 'Readex Pro', sans-serif;
     direction: rtl;
     overflow-x: hidden;
+    user-select: none;
 }
 
 :root {
