@@ -156,3 +156,9 @@ body {
 .error.active {
     color: red;
 }
+
+@media (min-width:320px) and (max-width:480px){
+    .container{
+        width: 95vw;
+    }
+}

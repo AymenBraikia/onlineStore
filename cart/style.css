@@ -515,6 +515,11 @@ body {
 }
 
 @media (min-width:320px) and (max-width:480px) {
+    .search{
+        font-size: 30px;
+        font-weight: bold;
+        color: var(--primary-color);
+    }
     .container {
         grid-template-columns: 1fr;
         column-gap: 0;
@@ -567,12 +572,13 @@ body {
         bottom: 5%;
         left: unset;
         right: 5%;
+        font-size: 20px;
     }
 
     .itemPrice {
         right: unset;
         left: 5%;
-        font-size: 25px;
+        font-size: 30px;
     }
 
     .cBoxContainer {
@@ -585,7 +591,7 @@ body {
 
     .cBoxContainer::before {
         content: 'Select';
-        font-size: 20px;
+        font-size: 25px;
         color: var(--primary-color);
     }
 
@@ -603,5 +609,14 @@ body {
         text-indent: 20px;
         position: relative;
         right: 0;
+    }
+    .title{
+        font-size: 30px;
+    }
+    .price>*{
+        font-size: 25px;
+    }
+    .submit{
+        font-size: 25px;
     }
 }

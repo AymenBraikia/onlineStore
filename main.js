@@ -1,12 +1,12 @@
 window.onload = e => {
     if (localStorage.getItem("account") == 'true') document.querySelector(".accountOptions").style.width = document.querySelector(".account").clientWidth + "px";
 };
-let cartItemsAmount,savesItemsAmount;
+let cartItemsAmount, savesItemsAmount;
 function checkCartItems() {
     if (document.querySelectorAll(".itemImage").length > 0) {
         document.querySelectorAll(".itemImage").forEach(el => {
             if (inCart.includes(el.getAttribute("imageurl"))) {
-                el.parentElement.childNodes[2].childNodes[0].setAttribute("activated",true);
+                el.parentElement.childNodes[2].childNodes[0].setAttribute("activated", true);
                 el.parentElement.childNodes[2].childNodes[0].classList.add("active");
             }
         });
@@ -16,18 +16,18 @@ function checkCartItems() {
     }
 }
 
-function hexToRgba(hex,alpha) {
-    let r,g,b;
+function hexToRgba(hex, alpha) {
+    let r, g, b;
 
-    r = parseInt(hex.slice(1,3),16);
-    g = parseInt(hex.slice(3,5),16);
-    b = parseInt(hex.slice(5,7),16);
+    r = parseInt(hex.slice(1, 3), 16);
+    g = parseInt(hex.slice(3, 5), 16);
+    b = parseInt(hex.slice(5, 7), 16);
 
     return `(${r},${g},${b},${alpha})`;
 }
 
 if (localStorage.getItem("themeColor")) {
-    document.body.style.cssText = `--primary-color: ${localStorage.getItem("themeColor")};--scroll-primary-colors: rgba${hexToRgba(localStorage.getItem("themeColor"),0.5)}`;
+    document.body.style.cssText = `--primary-color: ${localStorage.getItem("themeColor")};--scroll-primary-colors: rgba${hexToRgba(localStorage.getItem("themeColor"), 0.5)}`;
 }
 if (localStorage.getItem("mode") == "dark") {
     document.querySelector(".moon").classList.add("active");
@@ -40,7 +40,7 @@ function checkSavesItems() {
     if (document.querySelectorAll(".itemImage").length > 0) {
         document.querySelectorAll(".itemImage").forEach(el => {
             if (inSaves.includes(el.getAttribute("imageurl"))) {
-                el.parentElement.childNodes[2].childNodes[2].setAttribute("activated",true);
+                el.parentElement.childNodes[2].childNodes[2].setAttribute("activated", true);
                 el.parentElement.childNodes[2].childNodes[2].classList.add("active");
             }
         });
@@ -60,7 +60,7 @@ let a;
 let c = [];
 let itemsDetails = {};
 async function addToCart(body) {
-    fetch("https://web-store-server.aymenbraikia.repl.co/cartAdd",{
+    fetch("https://web-store-server.aymenbraikia.repl.co/cartAdd", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -73,7 +73,7 @@ async function addToCart(body) {
     });
 }
 async function addToSaved(body) {
-    fetch("https://web-store-server.aymenbraikia.repl.co/saveAdd",{
+    fetch("https://web-store-server.aymenbraikia.repl.co/saveAdd", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -121,12 +121,12 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
 
         if (localStorage.getItem("email")) {
 
-            await fetch("https://web-store-server.aymenbraikia.repl.co/cart",{
+            await fetch("https://web-store-server.aymenbraikia.repl.co/cart", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({email: localStorage.getItem("email")})
+                body: JSON.stringify({ email: localStorage.getItem("email") })
             }).then(res => {
                 return res.json();
             }).then(res => {
@@ -137,12 +137,12 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
                 document.querySelector(".extraTxt.cartTxt").innerHTML = res.items.length;
             });
 
-            await fetch("https://web-store-server.aymenbraikia.repl.co/saves",{
+            await fetch("https://web-store-server.aymenbraikia.repl.co/saves", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({email: localStorage.getItem("email")})
+                body: JSON.stringify({ email: localStorage.getItem("email") })
             }).then(res => {
                 return res.json();
             }).then(res => {
@@ -169,7 +169,7 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
                 let image = document.createElement("div");
                 image.classList.add("itemImage");
                 image.style.backgroundImage = `url(${item.imageUrl})`;
-                image.setAttribute("imageUrl",item.imageUrl);
+                image.setAttribute("imageUrl", item.imageUrl);
                 parent.appendChild(image);
 
                 let name = document.createElement("div");
@@ -188,10 +188,10 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
                 let cardOptions = document.createElement("div");
                 cardOptions.classList.add("cardOptions");
 
-                for (let j = 0;j < 3;j++) {
+                for (let j = 0; j < 3; j++) {
                     let cardOption = document.createElement("div");
-                    cardOption.classList.add(`cardOption${j + 1}`,"cardOption","ctr");
-                    cardOption.setAttribute("activated",'false');
+                    cardOption.classList.add(`cardOption${j + 1}`, "cardOption", "ctr");
+                    cardOption.setAttribute("activated", 'false');
                     cardOption.innerHTML = viewSvg[j];
                     cardOptions.appendChild(cardOption);
                 }
@@ -201,7 +201,7 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
                         let colorsSelect = document.querySelector(".colorsSelect");
                         colorsSelect.innerHTML = `<option value="">Pick a color</option>`;
 
-                        itemsDetails[e.parentElement.parentElement.childNodes[1].childNodes[1].innerHTML.replaceAll(" ","")].colors.forEach(el => {
+                        itemsDetails[e.parentElement.parentElement.childNodes[1].childNodes[1].innerHTML.replaceAll(" ", "")].colors.forEach(el => {
                             let opt = document.createElement("option");
                             opt.value = el;
                             opt.innerHTML = el;
@@ -229,7 +229,7 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
                     e.onclick = () => {
                         if (localStorage.getItem("email")) {
                             if (e.getAttribute("activated") == 'false') {
-                                e.setAttribute("activated",true);
+                                e.setAttribute("activated", true);
                                 e.classList.add("active");
                                 const data = {
                                     email: localStorage.getItem("email"),
@@ -255,7 +255,7 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
                     let colorsSelect = document.querySelector(".colorsSelect");
                     colorsSelect.innerHTML = `<option value="">Pick a color</option>`;
 
-                    itemsDetails[parent.childNodes[1].childNodes[1].innerHTML.replaceAll(" ","")].colors.forEach(el => {
+                    itemsDetails[parent.childNodes[1].childNodes[1].innerHTML.replaceAll(" ", "")].colors.forEach(el => {
                         let opt = document.createElement("option");
                         opt.value = el;
                         opt.innerHTML = el;
@@ -281,16 +281,16 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
                 };
                 document.querySelector(".newContainer").appendChild(parent);
 
-                if (!itemsDetails[e.name.replaceAll(" ","")]) {
-                    itemsDetails[e.name.replaceAll(" ","")] = {colors: []};
-                    itemsDetails[e.name.replaceAll(" ","")]['colors'].push(productID);
-                } else itemsDetails[e.name.replaceAll(" ","")]['colors'].push(productID);
+                if (!itemsDetails[e.name.replaceAll(" ", "")]) {
+                    itemsDetails[e.name.replaceAll(" ", "")] = { colors: [] };
+                    itemsDetails[e.name.replaceAll(" ", "")]['colors'].push(productID);
+                } else itemsDetails[e.name.replaceAll(" ", "")]['colors'].push(productID);
 
                 document.querySelectorAll(".cardOption3").forEach(e => {
                     e.onclick = () => {
                         if (localStorage.getItem("email")) {
                             if (e.getAttribute("activated") == 'false') {
-                                e.setAttribute("activated",true);
+                                e.setAttribute("activated", true);
                                 e.classList.add("active");
                                 const data = {
                                     email: localStorage.getItem("email"),
@@ -338,7 +338,7 @@ if (localStorage.getItem("account") == 'true') {
         document.querySelector(".moon").classList.toggle("active");
         document.querySelector(".sun").classList.toggle("active");
         document.body.classList.toggle("darkMode");
-        localStorage.getItem("mode") == "dark" ? localStorage.setItem("mode","light") : localStorage.setItem("mode","dark");
+        localStorage.getItem("mode") == "dark" ? localStorage.setItem("mode", "light") : localStorage.setItem("mode", "dark");
     };
     let themes = document.querySelector(".settingTheme");
 
@@ -356,7 +356,7 @@ if (localStorage.getItem("account") == 'true') {
     themesContainer.appendChild(themesColors);
     document.body.appendChild(themesContainer);
 
-    let colors = ["#9300ff","#0cff77","#006fff","#e27","#FFD700","#228B22","#FF6F61","#4169E1","#FF4500"];
+    let colors = ["#9300ff", "#0cff77", "#006fff", "#e27", "#FFD700", "#228B22", "#FF6F61", "#4169E1", "#FF4500"];
 
     colors.forEach(e => {
         let color = document.createElement("div");
@@ -366,8 +366,8 @@ if (localStorage.getItem("account") == 'true') {
         color.style.cursor = "pointer";
 
         color.onclick = el => {
-            document.body.style.cssText = `--primary-color: ${e};--scroll-primary-colors: rgba${hexToRgba(e,0.5)}`;
-            localStorage.setItem("themeColor",e);
+            document.body.style.cssText = `--primary-color: ${e};--scroll-primary-colors: rgba${hexToRgba(e, 0.5)}`;
+            localStorage.setItem("themeColor", e);
             themesContainer.classList.remove("active");
             document.querySelector(".darkBg").classList.remove("active");
             document.querySelector(".darkBg").style.zIndex = -1;
@@ -422,7 +422,7 @@ document.querySelector(".addToCart").onclick = e => {
             name: document.querySelector(".name").innerHTML,
             price: document.querySelector(".price").innerHTML,
             color: document.querySelector(".colorsSelect").value,
-            imageUrl: document.querySelector(".img").style.backgroundImage.slice(5,-2).replace("","")
+            imageUrl: document.querySelector(".img").style.backgroundImage.slice(5, -2).replace("", "")
         }
     });
 };
@@ -433,13 +433,13 @@ document.onscroll = e => {
     if (scrollY <= 300) document.querySelector(".scrollUp").style.cssText = "opacity: 0;";
 };
 document.querySelector(".scrollUp").onclick = e => {
-    scroll(0,0);
+    scroll(0, 0);
 };
 document.querySelector(".store.ctr").onclick = e => {
-    scroll(0,875);
+    scroll(0, 875);
 };
 document.querySelector(".general.ctr").onclick = e => {
-    scroll(0,0);
+    scroll(0, 0);
 };
 
 
@@ -448,10 +448,10 @@ function notification(msg) {
     document.querySelector(".notification").classList.add("active");
     setTimeout(() => {
         document.querySelector(".notification").classList.remove("active");
-    },3000);
+    }, 3000);
 }
-if(screen.availWidth >480)
-document.body.removeChild(document.querySelector(".hotDeals"));
+if (screen.availWidth > 480)
+    document.body.removeChild(document.querySelector(".hotDeals"));
 
 // media queries stuff
 
@@ -463,11 +463,14 @@ function mobileMode() {
     navBar.classList.add("navBar");
     document.body.appendChild(navBar);
 
+    document.querySelector(".mode").appendChild(document.querySelector(".moon"))
+    document.querySelector(".mode").appendChild(document.querySelector(".sun"))
+
     appearence.onclick = e => {
         document.querySelector(".moon").classList.toggle("active");
         document.querySelector(".sun").classList.toggle("active");
         document.body.classList.toggle("darkMode");
-        localStorage.getItem("mode") == "dark" ? localStorage.setItem("mode","light") : localStorage.setItem("mode","dark");
+        localStorage.getItem("mode") == "dark" ? localStorage.setItem("mode", "light") : localStorage.setItem("mode", "dark");
     };
     if (document.querySelector(".account")) {
         let userAccount = document.querySelector(".account");
@@ -492,7 +495,7 @@ function mobileMode() {
     themesContainer.appendChild(themesColors);
     document.body.appendChild(themesContainer);
 
-    let colors = ["#9300ff","#0cff77","#006fff","#e27","#FFD700","#228B22","#FF6F61","#4169E1","#FF4500"];
+    let colors = ["#9300ff", "#0cff77", "#006fff", "#e27", "#FFD700", "#228B22", "#FF6F61", "#4169E1", "#FF4500"];
 
 
     colors.forEach(e => {
@@ -503,8 +506,8 @@ function mobileMode() {
 
 
         color.onclick = el => {
-            document.body.style.cssText = `--primary-color: ${e};--scroll-primary-colors: rgba${hexToRgba(e,0.5)}`;
-            localStorage.setItem("themeColor",e);
+            document.body.style.cssText = `--primary-color: ${e};--scroll-primary-colors: rgba${hexToRgba(e, 0.5)}`;
+            localStorage.setItem("themeColor", e);
             themesContainer.classList.remove("active");
             document.querySelector(".navBar").classList.remove("active");
             document.querySelector(".darkBg").classList.remove("active");
@@ -526,11 +529,11 @@ function mobileMode() {
     navBar.appendChild(setting);
     navBar.appendChild(appearence);
     navBar.appendChild(themes);
-    if(document.querySelector(".header"))document.body.removeChild(document.querySelector(".header"));
+    if (document.querySelector(".header")) document.body.removeChild(document.querySelector(".header"));
     try {
         document.querySelector(".sections").removeChild(document.querySelector(".moreFilters"));
     } catch (e) {
-        
+
     }
 
     let cartTxt = document.createElement("div");
@@ -544,6 +547,8 @@ function mobileMode() {
     let accountTxt = document.createElement("div");
     accountTxt.innerHTML = "Sign Up";
     document.querySelector(".signUp").appendChild(accountTxt);
+
+    document.querySelector(".signUp").onclick = e => location.pathname = "/signUp"
 
     document.querySelectorAll(".cardOption1").forEach(e => {
         e.classList.contains("active");
@@ -560,17 +565,17 @@ function mobileMode() {
     }
     gridCounter();
     document.querySelector(".store").onclick = e => {
-        scroll(0,2895);
+        scroll(0, 2895);
     };
 
 
 
-    let touchStartX,touchEndX;
-    document.addEventListener('touchstart',(e) => {
+    let touchStartX, touchEndX;
+    document.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
     });
 
-    document.addEventListener('touchend',(e) => {
+    document.addEventListener('touchend', (e) => {
         touchEndX = e.changedTouches[0].clientX;
 
         if (touchEndX - touchStartX > 100) openNav();

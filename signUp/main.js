@@ -4,13 +4,13 @@ document.querySelector(".submit").onclick = () => {
     if (emailRegex.test(document.querySelector(".emailInput").value) === false) {
         document.querySelector(".error").innerHTML = "Use a valid email";
         document.querySelector(".error").classList.add("active");
-        setTimeout(() => document.querySelector(".error").classList.remove("active"),5000);
+        setTimeout(() => document.querySelector(".error").classList.remove("active"), 5000);
         return;
     }
     if (document.querySelector(".usernameInput").value == "") {
         document.querySelector(".error").innerHTML = "Username is required";
         document.querySelector(".error").classList.add("active");
-        setTimeout(() => document.querySelector(".error").classList.remove("active"),5000);
+        setTimeout(() => document.querySelector(".error").classList.remove("active"), 5000);
         return;
     }
     const data = {
@@ -23,7 +23,7 @@ document.querySelector(".submit").onclick = () => {
             houseNumber: ""
         }
     };
-    fetch("https://web-store-server.aymenbraikia.repl.co/signUp",{
+    fetch("https://web-store-server.aymenbraikia.repl.co/signUp", {
         body: JSON.stringify(data),
         headers: {
             "Content-Type": "application/json"
@@ -34,14 +34,14 @@ document.querySelector(".submit").onclick = () => {
     }).then(pureRes => {
         pureRes = JSON.parse(pureRes);
         if (pureRes.succession) {
-            localStorage.setItem("username",pureRes.username);
-            localStorage.setItem("email",pureRes.email);
-            localStorage.setItem("account",true);
+            localStorage.setItem("username", pureRes.username);
+            localStorage.setItem("email", pureRes.email);
+            localStorage.setItem("account", true);
             location.pathname = "";
         } else {
             document.querySelector(".error").innerHTML = pureRes.description;
             document.querySelector(".error").classList.add("active");
-            setTimeout(() => document.querySelector(".error").classList.remove("active"),5000);
+            setTimeout(() => document.querySelector(".error").classList.remove("active"), 5000);
         }
     });
 };

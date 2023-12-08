@@ -1,9 +1,26 @@
-const data = JSON.stringify({email: localStorage.getItem("email")});
+function hexToRgba(hex, alpha) {
+    let r, g, b;
+
+    r = parseInt(hex.slice(1, 3), 16);
+    g = parseInt(hex.slice(3, 5), 16);
+    b = parseInt(hex.slice(5, 7), 16);
+
+    return `(${r},${g},${b},${alpha})`;
+}
+
+if (localStorage.getItem("themeColor")) {
+    document.body.style.cssText = `--primary-color: ${localStorage.getItem("themeColor")};--scroll-primary-colors: rgba${hexToRgba(localStorage.getItem("themeColor"), 0.5)}`;
+}
+if (localStorage.getItem("mode") == "dark") {
+    document.body.classList.toggle("darkMode");
+}
+
+const data = JSON.stringify({ email: localStorage.getItem("email") });
 let i = 0;
 let bigImg = document.querySelector(".bigImg");
 
 async function addToCart(body) {
-    fetch("https://web-store-server.aymenbraikia.repl.co/cartAdd",{
+    fetch("https://web-store-server.aymenbraikia.repl.co/cartAdd", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -16,7 +33,7 @@ async function addToCart(body) {
     });
 }
 
-fetch("https://web-store-server.aymenbraikia.repl.co/savedList",{
+fetch("https://web-store-server.aymenbraikia.repl.co/savedList", {
     method: "post",
     headers: {
         "Content-Type": "application/json"
@@ -33,6 +50,10 @@ fetch("https://web-store-server.aymenbraikia.repl.co/savedList",{
         document.querySelector(".containerLeft").innerHTML = "<h3 style='text-alight:center;'>There Is Nothing To Display Here</h3>";
     };
 
+    if (screen.availWidth < 480)
+        document.querySelector(".containerRight").style.cssText = `grid-template-rows: repeat(${finalyResp.items.length}, 600px)`
+    else document.querySelector(".containerRight").style.cssText = `grid-template-rows: repeat(${document.querySelectorAll(".itemContainer").length},1000px)`;
+
     finalyResp.items.forEach(e => {
         let itemContainer = document.createElement("div");
         itemContainer.classList.add("itemContainer");
@@ -40,6 +61,17 @@ fetch("https://web-store-server.aymenbraikia.repl.co/savedList",{
         let image = document.createElement("div");
         image.classList.add("image");
         image.style.backgroundImage = `url(${finalyResp.items[i].imageUrl})`;
+
+        image.onclick = e => {
+            document.querySelector(".bigImgMoblie").classList.add("active")
+            document.querySelector(".bigImgMoblie").style.backgroundImage = image.style.backgroundImage;
+            document.querySelector(".darkBg").classList.add("active")
+        }
+
+        document.querySelector(".close").onclick = e => {
+            document.querySelector(".bigImgMoblie").classList.remove("active")
+            document.querySelector(".darkBg").classList.remove("active")
+        }
 
         let name = document.createElement("div");
         name.classList.add("name");
@@ -72,15 +104,14 @@ fetch("https://web-store-server.aymenbraikia.repl.co/savedList",{
                 email: localStorage.getItem("email"),
                 item: {
                     name: e.currentTarget.parentElement.parentElement.childNodes[0].innerHTML,
-                    price: e.currentTarget.parentElement.parentElement.childNodes[1].innerHTML.slice(5),
+                    price: e.currentTarget.parentElement.parentElement.childNodes[1].innerHTML,
                     color: null,
-                    imageUrl: document.querySelector(".bigImg").style.backgroundImage.slice(5,-2).replace("","")
+                    imageUrl: document.querySelector(".bigImg").style.backgroundImage.slice(5, -2).replace("", "")
                 }
             });
-            removeItem(remove.parentElement.parentElement.parentElement.childNodes[0].style.backgroundImage.slice(5,-2));
+            removeItem(remove.parentElement.parentElement.parentElement.childNodes[0].style.backgroundImage.slice(5, -2));
             remove.parentElement.parentElement.parentElement.style.display = "none";
             document.querySelector(".containerRight").removeChild(remove.parentElement.parentElement.parentElement);
-            document.querySelector(".containerRight").style.cssText = `grid-template-rows: repeat(${document.querySelectorAll(".itemContainer").length},200px)`;
             if (document.querySelectorAll(".itemContainer").length == 0) {
                 document.querySelector(".containerRight").innerHTML = "<div class='noItems'>There Is No Items In Saved List</div>";
                 document.querySelector(".containerRight").classList.add("active");
@@ -93,12 +124,12 @@ fetch("https://web-store-server.aymenbraikia.repl.co/savedList",{
             document.querySelector(".darkBg").style.display = "flex";
 
             document.querySelector(".warningYes").onclick = () => {
-                removeItem(remove.parentElement.parentElement.parentElement.childNodes[0].style.backgroundImage.slice(5,-2));
+                removeItem(remove.parentElement.parentElement.parentElement.childNodes[0].style.backgroundImage.slice(5, -2));
                 remove.parentElement.parentElement.parentElement.style.display = "none";
                 document.querySelector(".warning").style.display = "none";
                 document.querySelector(".darkBg").style.display = "none";
                 document.querySelector(".containerRight").removeChild(remove.parentElement.parentElement.parentElement);
-                document.querySelector(".containerRight").style.cssText = `grid-template-rows: repeat(${document.querySelectorAll(".itemContainer").length},200px)`;
+                document.querySelector(".containerRight").style.cssText = `grid-template-rows: repeat(${document.querySelectorAll(".itemContainer").length},600px)`;
                 if (document.querySelectorAll(".itemContainer").length == 0) {
                     document.querySelector(".containerRight").innerHTML = "<div class='noItems'>There Is No Items In Saved List</div>";
                     document.querySelector(".containerRight").classList.add("active");
@@ -115,13 +146,14 @@ fetch("https://web-store-server.aymenbraikia.repl.co/savedList",{
         details.appendChild(price);
         details.appendChild(buttons);
         document.querySelector(".containerRight").appendChild(itemContainer);
+
         i++;
     });
 });
 
 
 function removeItem(imageUrl) {
-    fetch("https://web-store-server.aymenbraikia.repl.co/savesRemove",{
+    fetch("https://web-store-server.aymenbraikia.repl.co/savesRemove", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -140,3 +172,8 @@ document.querySelector(".warningNo").onclick = () => {
 window.onscroll = e => {
     scrollY >= 100 ? document.querySelector(".containerLeft").style.cssText = 'top: 50%; transform: translateY(-50%); height:90vh;' : document.querySelector(".containerLeft").style.cssText = '120px';
 };
+
+if (screen.availWidth <= 480) {
+    document.querySelector(".search").innerHTML = "Wish List"
+}
+document.querySelector(".logo").onclick = e=>location.pathname = ""
