@@ -314,8 +314,8 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
         // document.querySelector(".newContainer").style.cssText = `grid-template-rows: repeat(${Math.ceil(products.length / 3)},600px);`;
     });
 
-document.querySelector(".sign-in").onclick = () => location.pathname = "/Port Website/signIn";
-document.querySelector(".sign-up").onclick = () => location.pathname = "/Port Website/signUp";
+document.querySelector(".sign-in").onclick = () => location.pathname = "./signIn";
+document.querySelector(".sign-up").onclick = () => location.pathname = "./signUp";
 
 if (localStorage.getItem("account") == 'true') {
     const account = document.querySelector(".account");
