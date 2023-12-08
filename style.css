@@ -982,7 +982,7 @@ body {
     cursor: pointer;
 }
 
-.setting::before {
+.settingPc::before {
     content: '';
     width: 0%;
     height: 100%;
@@ -994,7 +994,7 @@ body {
     z-index: -1;
 }
 
-.setting:hover::before {
+.settingPc:hover::before {
     width: 100%;
 }
 

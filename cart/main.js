@@ -1,3 +1,18 @@
+function hexToRgba(hex,alpha) {
+    let r,g,b;
+
+    r = parseInt(hex.slice(1,3),16);
+    g = parseInt(hex.slice(3,5),16);
+    b = parseInt(hex.slice(5,7),16);
+
+    return `(${r},${g},${b},${alpha})`;
+}
+
+if (localStorage.getItem("themeColor")) {
+    document.body.style.cssText = `--primary-color: ${localStorage.getItem("themeColor")};--scroll-primary-colors: rgba${hexToRgba(localStorage.getItem("themeColor"),0.5)}`;
+}
+if (localStorage.getItem("mode") == "dark") document.body.classList.toggle("darkMode");
+
 const data = JSON.stringify({email: localStorage.getItem("email")});
 fetch("https://web-store-server.aymenbraikia.repl.co/cart",{
     method: "post",
