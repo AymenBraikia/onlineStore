@@ -453,11 +453,6 @@ function notification(msg) {
 document.body.removeChild(document.querySelector(".hotDeals"));
 
 // media queries stuff
-window.onresize = e => {
-    if (screen.availWidth < 480) {
-        mobileMode();
-    }
-};
 
 function mobileMode() {
     let appearence = document.querySelector(".appearence");
@@ -531,8 +526,11 @@ function mobileMode() {
     navBar.appendChild(appearence);
     navBar.appendChild(themes);
     if(document.querySelector(".header"))document.body.removeChild(document.querySelector(".header"));
-    document.querySelector(".sections").removeChild(document.querySelector(".moreFilters"));
-
+    try {
+        document.querySelector(".sections").removeChild(document.querySelector(".moreFilters"));
+    } catch (e) {
+        
+    }
 
     let cartTxt = document.createElement("div");
     cartTxt.innerHTML = "Cart ";
@@ -590,6 +588,7 @@ function mobileMode() {
         document.querySelector(".darkBg").style.cssText = '';
         document.querySelector(".darkBg").style.zIndex = 1;
     }
+    console.log("?");
 }
 if (screen.availWidth < 480) {
     mobileMode();
