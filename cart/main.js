@@ -26,7 +26,7 @@ fetch("https://web-store-server.aymenbraikia.repl.co/cart", {
     return JSON.parse(Pureresp);
 }).then(finalyResp => {
     document.querySelector(".cartItems").innerHTML = `Products Count: ${finalyResp.items.length}`;
-    document.querySelector(".itemsContainer").style.cssText = `grid-template-rows: repeat(${finalyResp.items.length},600px)`;
+    screen.availWidth < 480 ? document.querySelector(".itemsContainer").style.cssText = `grid-template-rows: repeat(${finalyResp.items.length},600px)` : document.querySelector(".itemsContainer").style.cssText = `grid-template-rows: repeat(${finalyResp.items.length},200px)`;
     finalyResp.items.forEach(e => {
         const container = document.createElement("div");
         container.classList.add("itemContainer");
