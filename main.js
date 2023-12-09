@@ -598,7 +598,7 @@ function mobileMode() {
   };
   if (document.querySelector(".account")) {
     let userAccount = document.querySelector(".account");
-    userAccount.onclick = () => (location.pathname = "/account");
+    // userAccount.onclick = () => (location.pathname = "/account");
   }
 
   let themesContainer = document.createElement("div");
