@@ -81,7 +81,7 @@ body {
     width: 100px;
     height: 40px;
     background-color: var(--primary-color);
-    color: white;
+    color: var(--text-color);
     border: 3px solid;
     display: flex;
     justify-content: center;
@@ -122,7 +122,7 @@ body {
 }
 
 .itemsStuff>* {
-    background-color: white;
+    background-color: var(--text-color);
 }
 
 .itemsStuff {
@@ -141,7 +141,7 @@ body {
 }
 
 .itemsContainer>* {
-    background-color: white;
+    background-color: var(--cards-background);
 }
 
 
@@ -172,7 +172,7 @@ body {
     width: fit-content;
     height: fit-content;
     box-sizing: border-box;
-    color: white;
+    color: var(--text-color);
     background-color: var(--danger-color);
     border: 3px solid;
     border-color: transparent;
@@ -294,7 +294,7 @@ body {
     align-items: center;
     font-size: 18px;
     text-indent: 0;
-    color: white;
+    color: var(--text-color);
     cursor: pointer;
     transition: var(--transition);
 }
@@ -396,7 +396,7 @@ body {
 
 .removeItem {
     box-sizing: border-box;
-    color: white;
+    color: var(--text-color);
     background-color: var(--danger-color);
     border: 3px solid;
     border-color: transparent;
@@ -420,7 +420,7 @@ body {
     display: none;
     width: 400px;
     height: 250px;
-    background: white;
+    background: var(--cards-background);
     position: fixed;
     left: 50%;
     top: 50%;
@@ -481,14 +481,14 @@ body {
 
 .warningYes {
     background-color: var(--danger-color);
-    color: white;
+    color: var(--text-color);
 }
 
 .warningYes:hover {
     color: var(--danger-color);
     border-color: var(--danger-color);
     border-radius: 0;
-    background-color: white;
+    background-color: var(--cards-background);
 }
 
 .warningNo {
@@ -498,7 +498,7 @@ body {
 }
 
 .warningNo:hover {
-    color: white;
+    color: var(--text-color);
     border-color: transparent;
     border-radius: 0;
     background-color: var(--primary-color);
@@ -621,5 +621,7 @@ body {
     .submit{
         font-size: 25px;
     }
-    
+    .warningCont{
+        background-color: var(--cards-background);
+    }
 }

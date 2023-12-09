@@ -74,7 +74,8 @@ fetch("https://web-store-server.aymenbraikia.repl.co/cart", {
                 document.querySelector(".warning").style.display = "none";
                 document.querySelector(".darkBg").style.display = "none";
                 document.querySelector(".itemsContainer").removeChild(remove.parentElement);
-                document.querySelector(".itemsContainer").style.cssText = `grid-template-rows: repeat(${document.querySelectorAll(".itemContainer").length},200px)`;
+                if (screen.availWidth < 480) document.querySelector(".itemsContainer").style.cssText = `grid-template-rows: repeat(${document.querySelectorAll(".itemContainer").length},600px)`;
+                else document.querySelector(".itemsContainer").style.cssText = `grid-template-rows: repeat(${document.querySelectorAll(".itemContainer").length},200px)`;
             };
         };
         container.appendChild(remove);
