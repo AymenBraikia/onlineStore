@@ -709,8 +709,8 @@ function mobileMode() {
   document.addEventListener("touchend", (e) => {
     touchEndX = e.changedTouches[0].clientX;
 
-    if (touchEndX - touchStartX > 125) openNav();
-    if (touchStartX - touchEndX > 125) closeNav();
+    if (touchEndX - touchStartX > 100) openNav();
+    if (touchStartX - touchEndX > 100) closeNav();
   });
 
   document.querySelector(".swipe").onclick = (e) => {
