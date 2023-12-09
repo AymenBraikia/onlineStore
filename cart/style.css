@@ -530,6 +530,7 @@ body {
         width: 100%;
         grid-template-columns: 47.5% 47.5%;
         column-gap: 5%;
+        text-indent: unset;
     }
 
     .itemsStuff {
@@ -620,4 +621,5 @@ body {
     .submit{
         font-size: 25px;
     }
+    
 }
