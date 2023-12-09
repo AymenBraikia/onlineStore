@@ -445,6 +445,10 @@ body {
   transition: var(--transition);
 }
 
+.cardOption.active{
+ opacity: 0.5;
+}
+
 .cardOption.active:hover {
   background-color: var(--primary-color);
   backdrop-filter: opacity(0.75);
