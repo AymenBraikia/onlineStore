@@ -248,7 +248,6 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
 
             document.querySelector(".darkBg").classList.add("active");
             document.querySelector(".itemView").classList.add("active");
-            document.querySelector(".itemView").style.zIndex = 3;
 
             document.querySelector(
               ".img"
@@ -327,7 +326,6 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
 
           document.querySelector(".darkBg").classList.add("active");
           document.querySelector(".itemView").classList.add("active");
-          document.querySelector(".itemView").style.zIndex = 3;
 
           document.querySelector(
             ".img"
@@ -507,14 +505,12 @@ document.querySelector(".saves").onclick = () => (location.pathname = "/saves");
 document.querySelector(".close").onclick = (e) => {
   document.querySelector(".darkBg").classList.remove("active");
   document.querySelector(".itemView").classList.remove("active");
-  document.querySelector(".itemView").style.zIndex = -1;
 };
 document.querySelector(".darkBg").onclick = (e) => {
   document.querySelector(".darkBg").classList.remove("active");
   document.querySelector(".darkBg").style.cssText = "";
   document.querySelector(".themesContainer").classList.remove("active");
   document.querySelector(".itemView").classList.remove("active");
-  document.querySelector(".itemView").style.zIndex = -1;
   if (
     screen.availWidth < 480 &&
     document.querySelector(".navBar").classList.contains("active")
@@ -531,10 +527,7 @@ document.querySelector(".addToCart").onclick = (e) => {
       name: document.querySelector(".name").innerHTML,
       price: document.querySelector(".price").innerHTML,
       color: document.querySelector(".colorsSelect").value,
-      imageUrl: document
-        .querySelector(".img")
-        .style.backgroundImage.slice(5, -2)
-        .replace("", ""),
+      imageUrl: document.querySelector(".img").style.backgroundImage.slice(5, -2).replace("", ""),
     },
   });
 };
@@ -634,10 +627,7 @@ function mobileMode() {
     color.style.boxShadow = `0 0 5px 0px ${e}`;
 
     color.onclick = (el) => {
-      document.body.style.cssText = `--primary-color: ${e};--scroll-primary-colors: rgba${hexToRgba(
-        e,
-        0.5
-      )}`;
+      document.body.style.cssText = `--primary-color: ${e};--scroll-primary-colors: rgba${hexToRgba(e,0.5)}`;
       localStorage.setItem("themeColor", e);
       themesContainer.classList.remove("active");
       closeNav();
@@ -728,7 +718,9 @@ function mobileMode() {
     document.querySelector(".navBar").classList.remove("active");
     document.querySelector(".darkBg").classList.remove("active");
     document.querySelector(".swipe").classList.remove("active");
+    document.querySelector(".img").classList.remove("active");
     document.querySelector(".darkBg").style.cssText = "";
+    document.querySelector(".itemView").classList.remove("active");
   }
 
   let logoContainer = document.createElement("div");
