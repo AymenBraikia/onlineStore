@@ -1310,7 +1310,7 @@ body {
 
   .container {
     grid-template-rows: 2150px 600px 1fr;
-    top: 40vh;
+    top: 35vh;
   }
 
   .whyUs {
