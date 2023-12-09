@@ -474,7 +474,7 @@ body {
 
 .cardOption:hover>* {
   transform: scale(1.3);
-  fill: white;
+  fill: var(--text-color);
 }
 
 .signUp {
@@ -484,7 +484,7 @@ body {
 .signUp:hover .signActions {
   height: 100px;
   background-color: var(--primary-color);
-  color: white;
+  color: var(--text-color);
 }
 
 .signActions {
@@ -499,7 +499,7 @@ body {
   position: absolute;
   transform: translateX(-30%);
   z-index: 5;
-  border: 3px solid white;
+  border: 3px solid var(--body-background);
   color: transparent;
 }
 
@@ -511,7 +511,7 @@ body {
 }
 
 .sign:hover {
-  background-color: white;
+  background-color: var(--cards-background);
   color: var(--primary-color);
 }
 
@@ -525,7 +525,7 @@ body {
   min-width: 100px;
   padding: 10px 20px;
   background-color: var(--primary-color);
-  color: white;
+  color: var(--text-color);
   transition: var(--transition);
   border-radius: var(--border-raduis);
   border: 3px solid;
@@ -1280,7 +1280,7 @@ body {
     display: grid;
     grid-template-columns: 40vw repeat(2, 30vw);
     position: fixed !important;
-    top: 0 !important;
+    top: 100px !important;
     z-index: 2;
   }
 
@@ -1484,5 +1484,23 @@ body {
     height: 80vh;
   }
 
-
+.logoContainer{
+  width: 100%;
+  height: 100px;
+  background-color: var(--cards-background);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.logoMobile{
+  width: 250px;
+  height: 100%;
+  background-image: url(/images/SapphireSartorial-logos_black.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.logoMobile.dark{
+  background-image: url(/images/SapphireSartorial-logos_white.png);
+}
 }

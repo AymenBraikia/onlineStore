@@ -11,8 +11,10 @@ function hexToRgba(hex, alpha) {
 if (localStorage.getItem("themeColor")) {
     document.body.style.cssText = `--primary-color: ${localStorage.getItem("themeColor")};--scroll-primary-colors: rgba${hexToRgba(localStorage.getItem("themeColor"), 0.5)}`;
 }
-if (localStorage.getItem("mode") == "dark") document.body.classList.toggle("darkMode");
-
+if (localStorage.getItem("mode") == "dark") {
+    document.body.classList.toggle("darkMode");
+    document.querySelector(".logo").classList.toggle("dark");
+}
 const data = JSON.stringify({ email: localStorage.getItem("email") });
 fetch("https://web-store-server.aymenbraikia.repl.co/cart", {
     method: "post",

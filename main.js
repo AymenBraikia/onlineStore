@@ -240,10 +240,10 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
               document.querySelector(
                 ".img"
               ).style.backgroundImage = `url(/images/${document
-                  .querySelector(".name")
-                  .innerHTML.split(" ")[0]
-                  .toLocaleLowerCase() + e.target.value
-                }.jpg)`;
+                .querySelector(".name")
+                .innerHTML.split(" ")[0]
+                .toLocaleLowerCase() + e.target.value
+              }.jpg)`;
             };
 
             document.querySelector(".darkBg").classList.add("active");
@@ -319,10 +319,10 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
             document.querySelector(
               ".img"
             ).style.backgroundImage = `url(/images/${document
-                .querySelector(".name")
-                .innerHTML.split(" ")[0]
-                .toLocaleLowerCase() + e.target.value
-              }.jpg)`;
+              .querySelector(".name")
+              .innerHTML.split(" ")[0]
+              .toLocaleLowerCase() + e.target.value
+            }.jpg)`;
           };
 
           document.querySelector(".darkBg").classList.add("active");
@@ -427,9 +427,7 @@ if (localStorage.getItem("account") == "true") {
     document.querySelector(".sun").classList.toggle("active");
     document.body.classList.toggle("darkMode");
     document.querySelector(".logoImg").classList.toggle("dark");
-    localStorage.getItem("mode") == "dark"
-      ? localStorage.setItem("mode", "light")
-      : localStorage.setItem("mode", "dark");
+    localStorage.getItem("mode") == "dark" ? localStorage.setItem("mode", "light") : localStorage.setItem("mode", "dark");
   };
   let themes = document.querySelector(".settingTheme");
 
@@ -491,7 +489,9 @@ if (localStorage.getItem("account") == "true") {
     language
     */
   document.querySelector(".logout").onclick = () => {
-    localStorage.clear();
+    localStorage.removeItem("account")
+    localStorage.removeItem("username")
+    localStorage.removeItem("email")
     location.reload();
   };
   account.classList.add("active");
@@ -593,10 +593,8 @@ function mobileMode() {
     document.querySelector(".moon").classList.toggle("active");
     document.querySelector(".sun").classList.toggle("active");
     document.body.classList.toggle("darkMode");
-    document.querySelector(".logoImg").classList.toggle("dark");
-    localStorage.getItem("mode") == "dark"
-      ? localStorage.setItem("mode", "light")
-      : localStorage.setItem("mode", "dark");
+    document.querySelector(".logoMobile").classList.toggle("dark")
+    localStorage.getItem("mode") == "dark" ? localStorage.setItem("mode", "light") : localStorage.setItem("mode", "dark");
   };
   if (document.querySelector(".account")) {
     let userAccount = document.querySelector(".account");
@@ -692,7 +690,7 @@ function mobileMode() {
       document.querySelector(
         ".container"
       ).style.cssText = `grid-template-rows: 2150px 600px ${c.length * 650 + 150
-        }px; height: fit-content;`;
+      }px; height: fit-content;`;
       document.querySelector(
         ".newContainer"
       ).style.cssText = `grid-template-rows: repeat(${c.length},600px); grid-template-columns: 100%;`;
@@ -716,9 +714,7 @@ function mobileMode() {
   });
 
   document.querySelector(".swipe").onclick = (e) => {
-    document.querySelector(".swipe").classList.contains("active")
-      ? closeNav()
-      : openNav();
+    document.querySelector(".swipe").classList.contains("active") ? closeNav() : openNav();
   };
   document.querySelector(".darkBg").onclick = closeNav;
 
@@ -734,6 +730,17 @@ function mobileMode() {
     document.querySelector(".swipe").classList.remove("active");
     document.querySelector(".darkBg").style.cssText = "";
   }
+
+  let logoContainer = document.createElement("div");
+  logoContainer.classList.add("logoContainer")
+  logoContainer.classList.add("ctr")
+
+  let logoMobile = document.createElement("div")
+  logoMobile.classList.add("logoMobile")
+  if (localStorage.getItem("mode") == "dark") logoMobile.classList.toggle("dark")
+
+  logoContainer.appendChild(logoMobile)
+  document.body.appendChild(logoContainer)
 }
 if (screen.availWidth < 480) {
   mobileMode();

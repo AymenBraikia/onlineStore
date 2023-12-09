@@ -49,10 +49,17 @@ body {
 }
 
 .logo {
-    width: 100px;
-    height: 100px;
-    background-color: var(--primary-color);
-    border-radius: 50%;
+    width: 200px;
+    height: 100%;
+    background-image: url(/images/SapphireSartorial-logos_black.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.logo.dark {
+    background-image: url(/images/SapphireSartorial-logos_white.png);
 }
 
 .search {
@@ -66,6 +73,8 @@ body {
 .searchInp {
     width: 60%;
     height: 40px;
+    background-color: var(--cards-background);
+    color: var(--text-color);
     border-radius: var(--border-raduis);
     border: 3px solid var(--primary-color);
     outline: none;
@@ -516,11 +525,12 @@ body {
 }
 
 @media (min-width:320px) and (max-width:480px) {
-    .search{
+    .search {
         font-size: 30px;
         font-weight: bold;
         color: var(--primary-color);
     }
+
     .container {
         grid-template-columns: 1fr;
         column-gap: 0;
@@ -601,6 +611,7 @@ body {
         width: 30px;
         height: 30px;
     }
+
     .purchaseStuff {
         height: 300px;
         display: flex;
@@ -612,16 +623,20 @@ body {
         position: relative;
         right: 0;
     }
-    .title{
+
+    .title {
         font-size: 30px;
     }
-    .price>*{
+
+    .price>* {
         font-size: 25px;
     }
-    .submit{
+
+    .submit {
         font-size: 25px;
     }
-    .warningCont{
+
+    .warningCont {
         background-color: var(--cards-background);
     }
 }

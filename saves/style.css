@@ -14,8 +14,9 @@ body {
     --text-color: white;
     --body-background: rgb(0, 0, 0);
 }
-.mobile{
-    --products-count:repeat(0,600px);
+
+.mobile {
+    --products-count: repeat(0, 600px);
 }
 
 :root {
@@ -37,6 +38,7 @@ body {
     background-color: var(--primary-color);
     border-radius: 10px;
 }
+
 .header {
     background-color: var(--cards-background);
     position: absolute;
@@ -50,10 +52,17 @@ body {
 }
 
 .logo {
-    width: 75px;
-    height: 75px;
-    background-color: var(--primary-color);
-    border-radius: 50%;
+    width: 200px;
+    height: 100%;
+    background-image: url(/images/SapphireSartorial-logos_black.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.logo.dark {
+    background-image: url(/images/SapphireSartorial-logos_white.png);
 }
 
 .search {
@@ -67,6 +76,8 @@ body {
 .searchInp {
     width: 60%;
     height: 40px;
+    background-color: var(--cards-background);
+    color: var(--text-color);
     border-radius: var(--border-raduis);
     border: 3px solid var(--primary-color);
     outline: none;
@@ -339,7 +350,8 @@ body {
     opacity: 0;
     transition: var(--transition);
 }
-.darkBg.active{
+
+.darkBg.active {
     opacity: 1;
     z-index: 5;
 }
@@ -365,44 +377,51 @@ body {
 }
 
 @media (min-width:320px) and (max-width:480px) {
-    .search{
+    .search {
         font-size: 30px;
         font-weight: bold;
         color: var(--primary-color);
     }
-    .itemContainer::before{
+
+    .itemContainer::before {
         display: none;
     }
-    .containerLeft{
+
+    .containerLeft {
         display: none;
     }
-    .containerRight{
-    width: 95vw;
-    right: 50%;
-    transform: translateX(50%);
+
+    .containerRight {
+        width: 95vw;
+        right: 50%;
+        transform: translateX(50%);
     }
-    .itemContainer{
-    grid-template-columns: 100%;
-    grid-template-rows: 70% 30%;
+
+    .itemContainer {
+        grid-template-columns: 100%;
+        grid-template-rows: 70% 30%;
     }
-    .bigImgMoblie{
+
+    .bigImgMoblie {
         width: 90vw;
         height: 80vh;
         position: fixed;
         left: 50%;
         top: 50%;
-        transform: translate(-50%,-50%);
+        transform: translate(-50%, -50%);
         background-position: center;
         background-size: cover;
         opacity: 0;
         z-index: -1;
         transition: var(--transition);
     }
-    .bigImgMoblie.active{
+
+    .bigImgMoblie.active {
         opacity: 1;
         z-index: 10;
     }
-    .close{
+
+    .close {
         width: fit-content;
         height: fit-content;
         position: absolute;

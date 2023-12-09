@@ -13,8 +13,8 @@ if (localStorage.getItem("themeColor")) {
 }
 if (localStorage.getItem("mode") == "dark") {
     document.body.classList.toggle("darkMode");
+    document.querySelector(".logo").classList.toggle("dark");
 }
-
 const data = JSON.stringify({ email: localStorage.getItem("email") });
 let i = 0;
 let bigImg = document.querySelector(".bigImg");

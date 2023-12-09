@@ -1,3 +1,11 @@
+if (localStorage.getItem("mode") == "dark") {
+    document.body.classList.toggle("darkMode");
+    // document.querySelector(".logoImg").classList.toggle("dark");
+}
+if (localStorage.getItem("themeColor")) {
+    document.body.style.cssText = `--primary-color: ${localStorage.getItem("themeColor")}`
+}
+
 document.querySelector(".forgotPassword").onclick = () => location.pathname = "/signIn/index.html";
 const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 document.querySelector(".submit").onclick = () => {
