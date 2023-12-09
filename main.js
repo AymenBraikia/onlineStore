@@ -42,6 +42,7 @@ if (localStorage.getItem("themeColor")) {
 if (localStorage.getItem("mode") == "dark") {
   document.querySelector(".moon").classList.add("active");
   document.body.classList.toggle("darkMode");
+  document.querySelector(".logoImg").classList.toggle("dark");
 } else document.querySelector(".sun").classList.add("active");
 
 function checkSavesItems() {
@@ -238,12 +239,11 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
             colorsSelect.onchange = (e) => {
               document.querySelector(
                 ".img"
-              ).style.backgroundImage = `url(/images/${
-                document
+              ).style.backgroundImage = `url(/images/${document
                   .querySelector(".name")
                   .innerHTML.split(" ")[0]
                   .toLocaleLowerCase() + e.target.value
-              }.jpg)`;
+                }.jpg)`;
             };
 
             document.querySelector(".darkBg").classList.add("active");
@@ -318,12 +318,11 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
           colorsSelect.onchange = (e) => {
             document.querySelector(
               ".img"
-            ).style.backgroundImage = `url(/images/${
-              document
+            ).style.backgroundImage = `url(/images/${document
                 .querySelector(".name")
                 .innerHTML.split(" ")[0]
                 .toLocaleLowerCase() + e.target.value
-            }.jpg)`;
+              }.jpg)`;
           };
 
           document.querySelector(".darkBg").classList.add("active");
@@ -427,6 +426,7 @@ if (localStorage.getItem("account") == "true") {
     document.querySelector(".moon").classList.toggle("active");
     document.querySelector(".sun").classList.toggle("active");
     document.body.classList.toggle("darkMode");
+    document.querySelector(".logoImg").classList.toggle("dark");
     localStorage.getItem("mode") == "dark"
       ? localStorage.setItem("mode", "light")
       : localStorage.setItem("mode", "dark");
@@ -593,6 +593,7 @@ function mobileMode() {
     document.querySelector(".moon").classList.toggle("active");
     document.querySelector(".sun").classList.toggle("active");
     document.body.classList.toggle("darkMode");
+    document.querySelector(".logoImg").classList.toggle("dark");
     localStorage.getItem("mode") == "dark"
       ? localStorage.setItem("mode", "light")
       : localStorage.setItem("mode", "dark");
@@ -662,7 +663,7 @@ function mobileMode() {
     document
       .querySelector(".sections")
       .removeChild(document.querySelector(".moreFilters"));
-  } catch (e) {}
+  } catch (e) { }
 
   let cartTxt = document.createElement("div");
   cartTxt.innerHTML = "Cart ";
@@ -690,9 +691,8 @@ function mobileMode() {
     if (c.length > 0) {
       document.querySelector(
         ".container"
-      ).style.cssText = `grid-template-rows: 2150px 600px ${
-        c.length * 650 + 150
-      }px; height: fit-content;`;
+      ).style.cssText = `grid-template-rows: 2150px 600px ${c.length * 650 + 150
+        }px; height: fit-content;`;
       document.querySelector(
         ".newContainer"
       ).style.cssText = `grid-template-rows: repeat(${c.length},600px); grid-template-columns: 100%;`;

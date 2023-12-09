@@ -53,7 +53,7 @@ body {
   width: 100vw;
   height: 10vw;
   display: grid;
-  grid-template-columns: 10% 60% 30%;
+  grid-template-columns: 15% 50% 30%;
   align-items: center;
   justify-content: flex-start;
 }
@@ -64,11 +64,18 @@ body {
 }
 
 .logoImg {
-  width: 50px;
-  height: 50px;
+  width: 100%;
+  max-width: 200px;
+  height: 100%;
   border-radius: 50%;
-  background-color: var(--primary-color);
-  /* background-image: var(--gradient-background); */
+  background-image: url('/images/SapphireSartorial-logos_black.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.logoImg.dark{
+  background-image: url('/images/SapphireSartorial-logos_white.png');
+
 }
 
 .searchInp {
