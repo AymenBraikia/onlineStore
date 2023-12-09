@@ -1302,7 +1302,7 @@ body {
 
   .hotDeals {
     position: absolute;
-    top: 17%;
+    top: 25%;
     left: 10%;
     font-weight: bold;
     font-size: 30px;
@@ -1310,6 +1310,7 @@ body {
 
   .container {
     grid-template-rows: 2150px 600px 1fr;
+    top: 40vh;
   }
 
   .whyUs {
