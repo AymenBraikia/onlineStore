@@ -555,15 +555,15 @@ document.querySelector(".store.ctr").onclick = (e) => {
   scroll(0, 875);
 };
 document.querySelector(".general.ctr").onclick = (e) => {
-    scroll(0, 0);
+  scroll(0, 0);
 };
 document.querySelector(".contact.ctr").onclick = (e) => {
-  document.querySelector(".contactContainer").classList.add("active")
-  document.querySelector(".darkBg").classList.add("active")
-  document.querySelector(".darkBg").onclick = e=>{
-      document.querySelector(".darkBg").classList.remove("active")
-      document.querySelector(".contactContainer").classList.remove("active")
-  }
+  document.querySelector(".contactContainer").classList.add("active");
+  document.querySelector(".darkBg").classList.add("active");
+  document.querySelector(".darkBg").onclick = (e) => {
+    document.querySelector(".darkBg").classList.remove("active");
+    document.querySelector(".contactContainer").classList.remove("active");
+  };
 };
 
 function notification(msg) {
@@ -720,6 +720,7 @@ function mobileMode() {
       ? closeNav()
       : openNav();
   };
+  document.querySelector(".darkBg").onclick = closeNav;
 
   function openNav() {
     document.querySelector(".navBar").classList.add("active");
