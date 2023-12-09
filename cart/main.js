@@ -113,6 +113,7 @@ document.querySelector(".removeAll").onclick = e => {
             removeItem(e.childNodes[1].style.backgroundImage.slice(5, -2));
             document.querySelector(".itemsContainer").removeChild(e);
             document.querySelector(".itemsContainer").style.cssText = `grid-template-rows: repeat(${document.querySelectorAll(".itemContainer").length},200px)`;
+            document.querySelector(".cartItems").innerHTML = `Products Count: ${document.querySelectorAll(".itemContainer").length}`;
         });
         document.querySelector(".warning").style.display = "none";
         document.querySelector(".darkBg").style.display = "none";
