@@ -73,7 +73,8 @@ body {
   background-position: center;
   background-repeat: no-repeat;
 }
-.logoImg.dark{
+
+.logoImg.dark {
   background-image: url('/images/SapphireSartorial-logos_white.png');
 
 }
@@ -1301,7 +1302,7 @@ body {
 
   .hotDeals {
     position: absolute;
-    top: 15%;
+    top: 17%;
     left: 10%;
     font-weight: bold;
     font-size: 30px;
@@ -1484,23 +1485,25 @@ body {
     height: 80vh;
   }
 
-.logoContainer{
-  width: 100%;
-  height: 100px;
-  background-color: var(--cards-background);
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-.logoMobile{
-  width: 250px;
-  height: 100%;
-  background-image: url(/images/SapphireSartorial-logos_black.png);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.logoMobile.dark{
-  background-image: url(/images/SapphireSartorial-logos_white.png);
-}
+  .logoContainer {
+    width: 100%;
+    height: 100px;
+    background-color: var(--cards-background);
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .logoMobile {
+    width: 250px;
+    height: 100%;
+    background-image: url(/images/SapphireSartorial-logos_black.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .logoMobile.dark {
+    background-image: url(/images/SapphireSartorial-logos_white.png);
+  }
 }

@@ -69,6 +69,7 @@ fetch("https://web-store-server.aymenbraikia.repl.co/savedList", {
         }
 
         document.querySelector(".close").onclick = e => {
+            document.querySelector(".warning").classList.remove("active")
             document.querySelector(".bigImgMoblie").classList.remove("active")
             document.querySelector(".darkBg").classList.remove("active")
         }
@@ -120,14 +121,14 @@ fetch("https://web-store-server.aymenbraikia.repl.co/savedList", {
         };
 
         remove.onclick = () => {
-            document.querySelector(".warning").style.display = "flex";
-            document.querySelector(".darkBg").style.display = "flex";
+            document.querySelector(".warning").classList.add("active");
+            document.querySelector(".darkBg").classList.add("active");
 
             document.querySelector(".warningYes").onclick = () => {
                 removeItem(remove.parentElement.parentElement.parentElement.childNodes[0].style.backgroundImage.slice(5, -2));
                 remove.parentElement.parentElement.parentElement.style.display = "none";
-                document.querySelector(".warning").style.display = "none";
-                document.querySelector(".darkBg").style.display = "none";
+                document.querySelector(".warning").classList.remove("active");
+                document.querySelector(".darkBg").classList.remove("active")
                 document.querySelector(".containerRight").removeChild(remove.parentElement.parentElement.parentElement);
                 document.querySelector(".containerRight").style.cssText = `grid-template-rows: repeat(${document.querySelectorAll(".itemContainer").length},600px)`;
                 if (document.querySelectorAll(".itemContainer").length == 0) {
@@ -166,8 +167,8 @@ function removeItem(imageUrl) {
 };
 
 document.querySelector(".warningNo").onclick = () => {
-    document.querySelector(".warning").style.display = "none";
-    document.querySelector(".darkBg").style.display = "none";
+    document.querySelector(".warning").classList.remove("active");
+    document.querySelector(".darkBg").classList.remove("active");
 };
 window.onscroll = e => {
     scrollY >= 100 ? document.querySelector(".containerLeft").style.cssText = 'top: 50%; transform: translateY(-50%); height:90vh;' : document.querySelector(".containerLeft").style.cssText = '120px';
@@ -176,4 +177,4 @@ window.onscroll = e => {
 if (screen.availWidth <= 480) {
     document.querySelector(".search").innerHTML = "Wish List"
 }
-document.querySelector(".logo").onclick = e=>location.pathname = ""
+document.querySelector(".logo").onclick = e => location.pathname = ""

@@ -639,4 +639,9 @@ body {
     .warningCont {
         background-color: var(--cards-background);
     }
+
+    .cBox:checked:after {
+        content: '';
+        left: 32%;
+    }
 }

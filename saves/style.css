@@ -251,7 +251,7 @@ body {
 }
 
 .warning {
-    display: none;
+    display: flex;
     width: 400px;
     height: 250px;
     background: var(--body-background);
@@ -259,7 +259,14 @@ body {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    z-index: 4;
+    z-index: 0;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.warning.active {
+    z-index: 5;
+    opacity: 1;
 }
 
 .warningCont {
@@ -339,7 +346,7 @@ body {
 }
 
 .darkBg {
-    display: block;
+    display: flex;
     position: fixed;
     left: 0;
     top: 0;
@@ -353,7 +360,7 @@ body {
 
 .darkBg.active {
     opacity: 1;
-    z-index: 5;
+    z-index: 4;
 }
 
 .noItems {
@@ -403,8 +410,8 @@ body {
     }
 
     .bigImgMoblie {
-        width: 90vw;
-        height: 80vh;
+        width: 90%;
+        height: 70%;
         position: fixed;
         left: 50%;
         top: 50%;
