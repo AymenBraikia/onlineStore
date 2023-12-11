@@ -237,27 +237,15 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
             });
 
             colorsSelect.onchange = (e) => {
-              document.querySelector(
-                ".img"
-              ).style.backgroundImage = `url(/images/${document
-                .querySelector(".name")
-                .innerHTML.split(" ")[0]
-                .toLocaleLowerCase() + e.target.value
-              }.jpg)`;
+              document.querySelector(".img").style.backgroundImage = `url(/images/${document.querySelector(".name").innerHTML.split(" ")[0].toLocaleLowerCase() + e.target.value}.jpg)`;
             };
 
             document.querySelector(".darkBg").classList.add("active");
             document.querySelector(".itemView").classList.add("active");
 
-            document.querySelector(
-              ".img"
-            ).style.backgroundImage = `url(${e.parentElement.parentElement.childNodes[0].getAttribute(
-              "ImageUrl"
-            )})`;
-            document.querySelector(".name").innerHTML =
-              e.parentElement.parentElement.childNodes[1].childNodes[1].innerHTML;
-            document.querySelector(".price").innerHTML =
-              e.parentElement.parentElement.childNodes[1].childNodes[0].innerHTML;
+            document.querySelector(".img").style.backgroundImage = `url(${e.parentElement.parentElement.childNodes[0].getAttribute("ImageUrl")})`;
+            document.querySelector(".name").innerHTML = e.parentElement.parentElement.childNodes[1].childNodes[1].innerHTML;
+            document.querySelector(".price").innerHTML = e.parentElement.parentElement.childNodes[1].childNodes[0].innerHTML;
             document.querySelector(".stock").innerHTML = "Stock: ";
           };
         });
@@ -271,16 +259,10 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
                 const data = {
                   email: localStorage.getItem("email"),
                   item: {
-                    name: e.parentElement.parentElement.childNodes[1]
-                      .childNodes[1].innerText,
-                    price:
-                      e.parentElement.parentElement.childNodes[1].childNodes[0]
-                        .innerText,
+                    name: e.parentElement.parentElement.childNodes[1].childNodes[1].innerText,
+                    price: e.parentElement.parentElement.childNodes[1].childNodes[0].innerText,
                     color: null,
-                    imageUrl:
-                      e.parentElement.parentElement.childNodes[0].getAttribute(
-                        "imageUrl"
-                      ),
+                    imageUrl: e.parentElement.parentElement.childNodes[0].getAttribute("imageUrl"),
                   },
                 };
                 addToCart(data);
@@ -296,18 +278,11 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
         parent.appendChild(cardOptions);
 
         parent.onclick = (e) => {
-          if (
-            e.target.classList.contains("cardOption") ||
-            e.target.nodeName == "svg" ||
-            e.target.nodeName == "path"
-          )
-            return;
+          if (e.target.classList.contains("cardOption") || e.target.nodeName == "svg" || e.target.nodeName == "path") return;
           let colorsSelect = document.querySelector(".colorsSelect");
           colorsSelect.innerHTML = `<option value="">Pick a color</option>`;
 
-          itemsDetails[
-            parent.childNodes[1].childNodes[1].innerHTML.replaceAll(" ", "")
-          ].colors.forEach((el) => {
+          itemsDetails[parent.childNodes[1].childNodes[1].innerHTML.replaceAll(" ", "")].colors.forEach((el) => {
             let opt = document.createElement("option");
             opt.value = el;
             opt.innerHTML = el;
@@ -315,34 +290,18 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
           });
 
           colorsSelect.onchange = (e) => {
-            document.querySelector(
-              ".img"
-            ).style.backgroundImage = `url(/images/${document
-              .querySelector(".name")
-              .innerHTML.split(" ")[0]
-              .toLocaleLowerCase() + e.target.value
-            }.jpg)`;
+            document.querySelector(".img").style.backgroundImage = `url(/images/${document.querySelector(".name").innerHTML.split(" ")[0].toLocaleLowerCase() + e.target.value}.jpg)`;
           };
 
           document.querySelector(".darkBg").classList.add("active");
           document.querySelector(".itemView").classList.add("active");
 
-          document.querySelector(
-            ".img"
-          ).style.backgroundImage = `url(${parent.childNodes[0].getAttribute(
-            "ImageUrl"
-          )})`;
-          document.querySelector(".name").innerHTML =
-            parent.childNodes[1].childNodes[1].innerHTML;
-          document.querySelector(".price").innerHTML =
-            parent.childNodes[1].childNodes[0].innerHTML;
+          document.querySelector(".img").style.backgroundImage = `url(${parent.childNodes[0].getAttribute("ImageUrl")})`;
+          document.querySelector(".name").innerHTML = parent.childNodes[1].childNodes[1].innerHTML;
+          document.querySelector(".price").innerHTML = parent.childNodes[1].childNodes[0].innerHTML;
           document.querySelector(".stock").innerHTML = "Status: Valid";
 
-          if (
-            parent.childNodes[2].childNodes[0].getAttribute("activated") ==
-            "true"
-          )
-            document.querySelector(".addToCart").classList.add("active");
+          if (parent.childNodes[2].childNodes[0].getAttribute("activated") == "true") document.querySelector(".addToCart").classList.add("active");
           else document.querySelector(".addToCart").classList.remove("active");
         };
         document.querySelector(".newContainer").appendChild(parent);
@@ -350,8 +309,7 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
         if (!itemsDetails[e.name.replaceAll(" ", "")]) {
           itemsDetails[e.name.replaceAll(" ", "")] = { colors: [] };
           itemsDetails[e.name.replaceAll(" ", "")]["colors"].push(productID);
-        } else
-          itemsDetails[e.name.replaceAll(" ", "")]["colors"].push(productID);
+        } else itemsDetails[e.name.replaceAll(" ", "")]["colors"].push(productID);
 
         document.querySelectorAll(".cardOption3").forEach((e) => {
           e.onclick = () => {
@@ -389,6 +347,16 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
     // document.querySelector(".newContainer").style.cssText = `grid-template-rows: repeat(${Math.ceil(products.length / 3)},600px);`;
   });
 
+document.querySelector(".searchInp").addEventListener("input", e => {
+  document.querySelectorAll(".itemsCard").forEach(el => {
+    if (el.childNodes[1].childNodes[1].innerHTML.toLocaleLowerCase().includes(e.target.value.toLocaleLowerCase())) el.removeAttribute("data-search-inactive")
+    else el.setAttribute("data-search-inactive", "")
+  })
+})
+document.querySelector(".submit").onclick = e => {
+  scroll(0, 875);
+}
+
 document.querySelector(".sign-in").onclick = () =>
   (location.pathname = "./signIn");
 document.querySelector(".sign-up").onclick = () =>
@@ -415,7 +383,6 @@ if (localStorage.getItem("account") == "true") {
           e.target
         )
           return;
-      console.log(e.target);
       document.querySelector(".settingsContainer").classList.remove("active");
     };
   };
@@ -511,12 +478,9 @@ document.querySelector(".darkBg").onclick = (e) => {
   document.querySelector(".darkBg").style.cssText = "";
   document.querySelector(".themesContainer").classList.remove("active");
   document.querySelector(".itemView").classList.remove("active");
-  if (
-    screen.availWidth < 480 &&
-    document.querySelector(".navBar").classList.contains("active")
-  )
+  if (document.body.clientWidth < 480 && document.querySelector(".navBar").classList.contains("active"))
     document.querySelector(".swipe").classList.remove("active");
-  if (screen.availWidth < 480)
+  if (document.body.clientWidth < 480)
     document.querySelector(".navBar").classList.remove("active");
 };
 
@@ -566,10 +530,172 @@ function notification(msg) {
     document.querySelector(".notification").classList.remove("active");
   }, 3000);
 }
-if (screen.availWidth > 480)
+if (document.body.clientWidth > 480)
   document.body.removeChild(document.querySelector(".hotDeals"));
 
 // media queries stuff
+
+function tabletMode() {
+  let appearence = document.querySelector(".appearence");
+  let themes = document.querySelector(".themes");
+  let setting = document.querySelector(".setting");
+  let navBar = document.createElement("div");
+  navBar.classList.add("navBar");
+  document.body.appendChild(navBar);
+
+  document.querySelector(".mode").appendChild(document.querySelector(".moon"));
+  document.querySelector(".mode").appendChild(document.querySelector(".sun"));
+
+  appearence.onclick = (e) => {
+    document.querySelector(".moon").classList.toggle("active");
+    document.querySelector(".sun").classList.toggle("active");
+    document.body.classList.toggle("darkMode");
+    document.querySelector(".logoMobile").classList.toggle("dark")
+    localStorage.getItem("mode") == "dark" ? localStorage.setItem("mode", "light") : localStorage.setItem("mode", "dark");
+  };
+  if (document.querySelector(".account")) {
+    let userAccount = document.querySelector(".account");
+    // userAccount.onclick = () => (location.pathname = "/account");
+  }
+
+  let themesContainer = document.createElement("div");
+  themesContainer.classList.add("themesContainer");
+
+  let themesTxt = document.createElement("div");
+  themesTxt.classList.add("themesTxt");
+  themesTxt.innerHTML = "Choose a color:";
+
+  let themesColors = document.createElement("div");
+  themesColors.classList.add("themesColors");
+
+  themesContainer.appendChild(themesTxt);
+  themesContainer.appendChild(themesColors);
+  document.body.appendChild(themesContainer);
+
+  let colors = [
+    "#9300ff",
+    "#0cff77",
+    "#006fff",
+    "#e27",
+    "#FFD700",
+    "#228B22",
+    "#FF6F61",
+    "#4169E1",
+    "#FF4500",
+  ];
+
+  colors.forEach((e) => {
+    let color = document.createElement("div");
+    color.classList.add(".themeColor");
+    color.style.backgroundColor = e;
+    color.style.boxShadow = `0 0 5px 0px ${e}`;
+
+    color.onclick = (el) => {
+      document.body.style.cssText = `--primary-color: ${e};--scroll-primary-colors: rgba${hexToRgba(e, 0.5)}`;
+      localStorage.setItem("themeColor", e);
+      themesContainer.classList.remove("active");
+      closeNav();
+    };
+
+    themesColors.appendChild(color);
+  });
+
+  themes.onclick = (e) => {
+    themesContainer.classList.add("active");
+    document.querySelector(".darkBg").classList.add("active");
+  };
+
+  navBar.appendChild(document.querySelector(".extra.ctr"));
+  navBar.appendChild(setting);
+  navBar.appendChild(appearence);
+  navBar.appendChild(themes);
+  if (document.querySelector(".header"))
+    document.body.removeChild(document.querySelector(".header"));
+  try {
+    document
+      .querySelector(".sections")
+      .removeChild(document.querySelector(".moreFilters"));
+  } catch (e) { }
+
+  let cartTxt = document.createElement("div");
+  cartTxt.innerHTML = "Cart ";
+  document.querySelector(".cart").appendChild(cartTxt);
+
+  let savesTxt = document.createElement("div");
+  savesTxt.innerHTML = "Wish List ";
+  document.querySelector(".saves").appendChild(savesTxt);
+
+  let accountTxt = document.createElement("div");
+  accountTxt.innerHTML = "Sign Up";
+  document.querySelector(".signUp").appendChild(accountTxt);
+
+  document.querySelector(".signUp").onclick = (e) =>
+    (location.pathname = "/signUp");
+
+  document.querySelectorAll(".cardOption1").forEach((e) => {
+    e.classList.contains("active");
+  });
+  document.querySelectorAll(".cardOption3").forEach((e) => {
+    e.classList.contains("active");
+  });
+
+  function gridCounter() {
+    if (c.length > 0) {
+      document.querySelector(".container").style.cssText = `grid-template-rows: 1100px 600px ${(c.length / 2) * 650 + 150}px; height: fit-content;`;
+      document.querySelector(".newContainer").style.cssText = `grid-template-rows: repeat(${c.length / 2},600px); grid-template-columns: 45% 45%; column-gap: 10%`;
+    } else requestAnimationFrame(gridCounter);
+  }
+  gridCounter();
+  document.querySelector(".store").onclick = (e) => {
+    scroll(0, 2895);
+  };
+
+  let touchStartX, touchEndX;
+  document.addEventListener("touchstart", (e) => {
+    touchStartX = e.touches[0].clientX;
+  });
+
+  document.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].clientX;
+
+    if (touchEndX - touchStartX > 100) openNav();
+    if (touchStartX - touchEndX > 100) closeNav();
+  });
+
+  document.querySelector(".swipe").onclick = (e) => {
+    document.querySelector(".swipe").classList.contains("active") ? closeNav() : openNav();
+  };
+  document.querySelector(".darkBg").onclick = closeNav;
+
+  function openNav() {
+    document.querySelector(".navBar").classList.add("active");
+    document.querySelector(".darkBg").classList.add("active");
+    document.querySelector(".swipe").classList.add("active");
+    document.querySelector(".darkBg").style.cssText = "width:25vw;left:75vw;";
+  }
+  function closeNav() {
+    document.querySelector(".navBar").classList.remove("active");
+    document.querySelector(".darkBg").classList.remove("active");
+    document.querySelector(".swipe").classList.remove("active");
+    document.querySelector(".img").classList.remove("active");
+    document.querySelector(".darkBg").style.cssText = "";
+    document.querySelector(".itemView").classList.remove("active");
+  }
+
+  let logoContainer = document.createElement("div");
+  logoContainer.classList.add("logoContainer")
+  logoContainer.classList.add("ctr")
+
+  let logoMobile = document.createElement("div")
+  logoMobile.classList.add("logoMobile")
+  if (localStorage.getItem("mode") == "dark") logoMobile.classList.toggle("dark")
+
+  logoContainer.appendChild(logoMobile)
+  document.body.appendChild(logoContainer)
+
+
+
+}
 
 function mobileMode() {
   let appearence = document.querySelector(".appearence");
@@ -627,7 +753,7 @@ function mobileMode() {
     color.style.boxShadow = `0 0 5px 0px ${e}`;
 
     color.onclick = (el) => {
-      document.body.style.cssText = `--primary-color: ${e};--scroll-primary-colors: rgba${hexToRgba(e,0.5)}`;
+      document.body.style.cssText = `--primary-color: ${e};--scroll-primary-colors: rgba${hexToRgba(e, 0.5)}`;
       localStorage.setItem("themeColor", e);
       themesContainer.classList.remove("active");
       closeNav();
@@ -677,13 +803,8 @@ function mobileMode() {
 
   function gridCounter() {
     if (c.length > 0) {
-      document.querySelector(
-        ".container"
-      ).style.cssText = `grid-template-rows: 2150px 600px ${c.length * 650 + 150
-      }px; height: fit-content;`;
-      document.querySelector(
-        ".newContainer"
-      ).style.cssText = `grid-template-rows: repeat(${c.length},600px); grid-template-columns: 100%;`;
+      document.querySelector(".container").style.cssText = `grid-template-rows: 2150px 600px ${c.length * 650 + 150}px; height: fit-content;`;
+      document.querySelector(".newContainer").style.cssText = `grid-template-rows: repeat(${c.length},600px); grid-template-columns: 100%;`;
     } else requestAnimationFrame(gridCounter);
   }
   gridCounter();
@@ -734,6 +855,170 @@ function mobileMode() {
   logoContainer.appendChild(logoMobile)
   document.body.appendChild(logoContainer)
 }
-if (screen.availWidth < 480) {
-  mobileMode();
+
+function tabletMode() {
+  let appearence = document.querySelector(".appearence");
+  let themes = document.querySelector(".themes");
+  let setting = document.querySelector(".setting");
+  let navBar = document.createElement("div");
+  navBar.classList.add("navBar");
+  document.body.appendChild(navBar);
+
+  document.querySelector(".mode").appendChild(document.querySelector(".moon"));
+  document.querySelector(".mode").appendChild(document.querySelector(".sun"));
+
+  appearence.onclick = (e) => {
+    document.querySelector(".moon").classList.toggle("active");
+    document.querySelector(".sun").classList.toggle("active");
+    document.body.classList.toggle("darkMode");
+    document.querySelector(".logoMobile").classList.toggle("dark")
+    localStorage.getItem("mode") == "dark" ? localStorage.setItem("mode", "light") : localStorage.setItem("mode", "dark");
+  };
+  if (document.querySelector(".account")) {
+    let userAccount = document.querySelector(".account");
+    // userAccount.onclick = () => (location.pathname = "/account");
+  }
+
+  let themesContainer = document.createElement("div");
+  themesContainer.classList.add("themesContainer");
+
+  let themesTxt = document.createElement("div");
+  themesTxt.classList.add("themesTxt");
+  themesTxt.innerHTML = "Choose a color:";
+
+  let themesColors = document.createElement("div");
+  themesColors.classList.add("themesColors");
+
+  themesContainer.appendChild(themesTxt);
+  themesContainer.appendChild(themesColors);
+  document.body.appendChild(themesContainer);
+
+  let colors = [
+    "#9300ff",
+    "#0cff77",
+    "#006fff",
+    "#e27",
+    "#FFD700",
+    "#228B22",
+    "#FF6F61",
+    "#4169E1",
+    "#FF4500",
+  ];
+
+  colors.forEach((e) => {
+    let color = document.createElement("div");
+    color.classList.add(".themeColor");
+    color.style.backgroundColor = e;
+    color.style.boxShadow = `0 0 5px 0px ${e}`;
+
+    color.onclick = (el) => {
+      document.body.style.cssText = `--primary-color: ${e};--scroll-primary-colors: rgba${hexToRgba(e, 0.5)}`;
+      localStorage.setItem("themeColor", e);
+      themesContainer.classList.remove("active");
+      closeNav();
+    };
+
+    themesColors.appendChild(color);
+  });
+
+  themes.onclick = (e) => {
+    themesContainer.classList.add("active");
+    document.querySelector(".darkBg").classList.add("active");
+  };
+
+  navBar.appendChild(document.querySelector(".extra.ctr"));
+  navBar.appendChild(setting);
+  navBar.appendChild(appearence);
+  navBar.appendChild(themes);
+  if (document.querySelector(".header"))
+    document.body.removeChild(document.querySelector(".header"));
+  try {
+    document
+      .querySelector(".sections")
+      .removeChild(document.querySelector(".moreFilters"));
+  } catch (e) { }
+
+  let cartTxt = document.createElement("div");
+  cartTxt.innerHTML = "Cart ";
+  document.querySelector(".cart").appendChild(cartTxt);
+
+  let savesTxt = document.createElement("div");
+  savesTxt.innerHTML = "Wish List ";
+  document.querySelector(".saves").appendChild(savesTxt);
+
+  let accountTxt = document.createElement("div");
+  accountTxt.innerHTML = "Sign Up";
+  document.querySelector(".signUp").appendChild(accountTxt);
+
+  document.querySelector(".signUp").onclick = (e) =>
+    (location.pathname = "/signUp");
+
+  document.querySelectorAll(".cardOption1").forEach((e) => {
+    e.classList.contains("active");
+  });
+  document.querySelectorAll(".cardOption3").forEach((e) => {
+    e.classList.contains("active");
+  });
+
+  function gridCounter() {
+    if (c.length > 0) {
+      document.querySelector(".container").style.cssText = `grid-template-rows: 1100px 600px ${(c.length / 2) * 650 + 150}px; height: fit-content;`;
+      document.querySelector(".newContainer").style.cssText = `grid-template-rows: repeat(${c.length / 2},600px); grid-template-columns: 45% 45%; column-gap: 10%`;
+    } else requestAnimationFrame(gridCounter);
+  }
+  gridCounter();
+  document.querySelector(".store").onclick = (e) => {
+    scroll(0, 2895);
+  };
+
+  let touchStartX, touchEndX;
+  document.addEventListener("touchstart", (e) => {
+    touchStartX = e.touches[0].clientX;
+  });
+
+  document.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].clientX;
+
+    if (touchEndX - touchStartX > 100) openNav();
+    if (touchStartX - touchEndX > 100) closeNav();
+  });
+
+  document.querySelector(".swipe").onclick = (e) => {
+    document.querySelector(".swipe").classList.contains("active") ? closeNav() : openNav();
+  };
+  document.querySelector(".darkBg").onclick = closeNav;
+
+  function openNav() {
+    document.querySelector(".navBar").classList.add("active");
+    document.querySelector(".darkBg").classList.add("active");
+    document.querySelector(".swipe").classList.add("active");
+    document.querySelector(".darkBg").style.cssText = "width:50vw;left:50vw;";
+  }
+  function closeNav() {
+    document.querySelector(".navBar").classList.remove("active");
+    document.querySelector(".darkBg").classList.remove("active");
+    document.querySelector(".swipe").classList.remove("active");
+    document.querySelector(".img").classList.remove("active");
+    document.querySelector(".darkBg").style.cssText = "";
+    document.querySelector(".itemView").classList.remove("active");
+  }
+
+  let logoContainer = document.createElement("div");
+  logoContainer.classList.add("logoContainer")
+  logoContainer.classList.add("ctr")
+
+  let logoMobile = document.createElement("div")
+  logoMobile.classList.add("logoMobile")
+  if (localStorage.getItem("mode") == "dark") logoMobile.classList.toggle("dark")
+
+  logoContainer.appendChild(logoMobile)
+  document.body.appendChild(logoContainer)
+}
+
+if (document.body.clientWidth < 650) mobileMode();
+if (document.body.clientWidth > 650 && document.body.clientWidth < 1100) tabletMode();
+
+window.onresize = e => {
+  if (document.body.clientWidth < 650) mobileMode();
+  if (document.body.clientWidth > 650 && document.body.clientWidth < 1100) tabletMode();
 }

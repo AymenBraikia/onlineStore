@@ -106,10 +106,10 @@ body {
   font-family: "Readex Pro", sans-serif;
 }
 
+
 .submit {
-  /* background-image: var(--gradient-background); */
   background-color: var(--primary-color);
-  color: white;
+  color: var(--text-color);
   width: 100px;
   height: 50px;
   font-size: 14px;
@@ -122,6 +122,7 @@ body {
   box-sizing: border-box;
   border: 3px solid;
   border-color: transparent;
+  font-weight: bold;
 }
 
 .submit:hover {
@@ -159,7 +160,7 @@ body {
   width: 20px;
   height: 20px;
   background-color: var(--primary-color);
-  color: white;
+  color: var(--body-background);
   border-radius: 50%;
   border: 3px solid var(--body-background);
 }
@@ -176,7 +177,7 @@ body {
 
 .container {
   width: 100%;
-  height: 3000px;
+  /* height: 3000px; */
   position: absolute;
   left: 0px;
   top: 25vh;
@@ -545,7 +546,6 @@ body {
 .accountName {
   font-size: 18px;
   white-space: nowrap;
-  /* Prevent text from wrapping */
 }
 
 .signUp.active {
@@ -1146,7 +1146,377 @@ body {
   font-size: 18px;
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
+[data-search-inactive] {
+  display: none !important;
+}
+
+@media (min-width: 651px) and (max-width: 1100px) {
+  * {
+    overflow-x: hidden;
+  }
+
+  .notification {
+    right: -150%;
+  }
+
+  .navBar {
+    width: 0;
+    height: 100vh;
+    background-color: var(--blury-background);
+    color: var(--text-color);
+    font-size: 25px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    transition: var(--transition);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 45% repeat(3, 15%);
+    row-gap: 1.6%;
+    backdrop-filter: blur(10px);
+  }
+
+  .swipe {
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    left: 5%;
+    top: 50%;
+    transform: translate(0, -50%);
+    overflow: visible;
+    z-index: 10;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .swipe.active {
+    left: 55%;
+  }
+
+  .swipe::before,
+  .swipe::after {
+    content: "";
+    width: 5px;
+    height: 60%;
+    background-color: var(--primary-color);
+    display: flex;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -65%) rotate(-45deg);
+    border-radius: var(--border-raduis);
+    transition: var(--transition);
+  }
+
+  .swipe::after {
+    bottom: 40%;
+    top: unset;
+    transform: translate(-50%, 65%) rotate(45deg);
+  }
+
+  .swipe.active::before {
+    transform: translate(-50%, -65%) rotate(45deg);
+  }
+
+  .swipe.active::after {
+    transform: translate(-50%, 65%) rotate(-45deg);
+  }
+
+  .navBar.active {
+    width: 50vw;
+  }
+
+  .navBar>* {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .extra.ctr {
+    display: grid !important;
+    grid-template-rows: repeat(3, calc(85.6% / 3));
+    grid-template-columns: 1fr;
+    row-gap: 7.2%;
+  }
+
+  .extra>* {
+    fill: var(--text-color);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: row-reverse;
+  }
+
+  .savesCont,
+  .cartCont {
+    position: relative;
+  }
+
+  .extraTxt {
+    left: 0%;
+    bottom: 10%;
+    font-size: 16px;
+    border-color: var(--text-color);
+    color: var(--text-color);
+    background-color: var(--body-background);
+  }
+
+  /* .extraTxt.saveTxt {
+            left: 42%;
+            bottom: 20%;
+            font-size: 16px;
+        } */
+
+  .signActions {
+    display: none;
+  }
+
+  .signUpSvg,
+  .cartSvg,
+  .savesSvg {
+    width: 60px;
+  }
+
+  .sections {
+    width: 100vw;
+    height: 50px;
+    background-color: var(--primary-color);
+    display: grid;
+    grid-template-columns: 40vw repeat(2, 30vw);
+    position: fixed !important;
+    top: 100px !important;
+    z-index: 2;
+  }
+
+  .examples {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 40vw 40vw;
+    grid-template-rows: repeat(2, 500px);
+    justify-content: center;
+    gap: 50px;
+  }
+
+  .ex {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hotDeals {
+    position: absolute;
+    top: 25%;
+    left: 10%;
+    font-weight: bold;
+    font-size: 30px;
+  }
+
+  .container {
+    grid-template-rows: 2150px 600px 1fr;
+    top: 35vh;
+  }
+
+  .whyUs {
+    flex-direction: column;
+  }
+
+  .info {
+    width: 80%;
+    border: unset;
+    border-top: 2px solid #969696;
+  }
+
+  .info1 {
+    border: unset !important;
+  }
+
+  .details {
+    display: none;
+  }
+
+  .circle {
+    display: none;
+  }
+
+  .itemViewContainer {
+    width: 100%;
+  }
+
+  .img {
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    position: unset;
+    transform: translate(0, 0);
+  }
+
+  .close {
+    z-index: 3;
+  }
+
+  .itemView {
+    width: 90vw;
+  }
+
+  .nav:hover {
+    color: var(--primary-color);
+    transition: var(--transition);
+    stroke: var(--primary-color);
+  }
+
+  .nav:hover>*>svg {
+    stroke: var(--primary-color);
+  }
+
+  .mode {
+    width: 65px;
+    height: 65px;
+    position: relative;
+    overflow: visible;
+  }
+
+  .appSvg {
+    width: 100%;
+    stroke: var(--text-color);
+    fill: none;
+    opacity: 0;
+    display: block;
+    margin-left: 20px;
+    position: absolute;
+    transition: var(--transition);
+  }
+
+  .appSvg.active {
+    opacity: 1;
+  }
+
+  .newContainer,
+  .new2 {
+    overflow: visible;
+  }
+
+  .themesContainer {
+    width: 90%;
+    height: 65%;
+    background-color: var(--cards-background);
+    color: var(--text-color);
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 15;
+    display: none;
+    place-content: center;
+    overflow: visible;
+  }
+
+  .themesContainer.active {
+    display: grid;
+    grid-template-columns: 80%;
+    grid-template-rows: 20% 80%;
+  }
+
+  .themesTxt {
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .themesColors {
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
+    grid-template-rows: repeat(3, 23%);
+    gap: 3%;
+    place-content: center;
+    overflow: visible;
+  }
+
+  .notification.active {
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  .account.active {
+    width: 100%;
+    height: 90%;
+    background: unset;
+    padding: 0;
+    border-radius: unset;
+    overflow: hidden;
+  }
+
+  .account.active:hover {
+    border: unset;
+    background-color: unset;
+  }
+
+  .accountName {
+    font-size: 25px;
+    white-space: nowrap;
+  }
+
+  .cardOptions {
+    bottom: 100px;
+    background-color: var(--cards-background);
+    border-radius: 0;
+  }
+
+  .cardOption {
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .cardOption.active:hover>* {
+    fill: var(--primary-color);
+  }
+
+  .cardOption.active:hover {
+    background-color: transparent;
+  }
+
+  .cardOption.active {
+    opacity: 0.3;
+  }
+
+  .itemsCard:hover {
+    transform: scale(1);
+  }
+
+  .contactContainer {
+    width: 90vw;
+    height: 80vh;
+  }
+
+  .logoContainer {
+    width: 100%;
+    height: 100px;
+    background-color: var(--cards-background);
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .logoMobile {
+    width: 250px;
+    height: 100%;
+    background-image: url(/images/SapphireSartorial-logos_black.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .logoMobile.dark {
+    background-image: url(/images/SapphireSartorial-logos_white.png);
+  }
+}
+
+@media (min-width: 320px) and (max-width: 650px) {
   * {
     overflow-x: hidden;
   }
