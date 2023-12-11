@@ -130,7 +130,7 @@ fetch("https://web-store-server.aymenbraikia.repl.co/savedList", {
                 document.querySelector(".warning").classList.remove("active");
                 document.querySelector(".darkBg").classList.remove("active")
                 document.querySelector(".containerRight").removeChild(remove.parentElement.parentElement.parentElement);
-                document.querySelector(".containerRight").style.cssText = `grid-template-rows: repeat(${document.querySelectorAll(".itemContainer").length},600px)`;
+                screen.availWidth < 480 ? document.querySelector(".containerRight").style.cssText = `grid-template-rows: repeat(${document.querySelectorAll(".itemContainer").length},600px)` : document.querySelector(".containerRight").style.cssText = `grid-template-rows: repeat(${document.querySelectorAll(".itemContainer").length},200px)`
                 if (document.querySelectorAll(".itemContainer").length == 0) {
                     document.querySelector(".containerRight").innerHTML = "<div class='noItems'>There Is No Items In Saved List</div>";
                     document.querySelector(".containerRight").classList.add("active");

@@ -207,7 +207,7 @@ body {
 
 .sections>*:hover {
   color: var(--primary-color);
-  background-color: white;
+  background-color: var(--cards-background);
 }
 
 .moreFilters::before {
@@ -238,7 +238,7 @@ body {
 }
 
 .moreFilters:hover .options>*:hover {
-  background-color: white;
+  background-color: var(--cards-background);
   color: var(--primary-color);
   border-color: var(--primary-color);
 }
@@ -437,7 +437,7 @@ body {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background-color: #eee;
+  background-color: var(--cards-background);
   transition: var(--transition);
   border-radius: var(--border-raduis);
 }
@@ -651,7 +651,7 @@ body {
 .details {
   width: calc(50% - 40px);
   height: 80%;
-  background-color: #eee;
+  background-color: var(--cards-background);
   position: absolute;
   left: 20px;
   top: 50%;
@@ -710,8 +710,9 @@ body {
   width: 20%;
 }
 
-.sizeSelect>* {
-  background-color: white;
+.sizeSelect>*,
+.colorsSelect>* {
+  background-color: var(--cards-background);
   color: var(--primary-color);
 }
 
@@ -725,11 +726,6 @@ body {
   border: 3px solid var(--primary-color);
   font-family: "Readex Pro", sans-serif;
   font-size: 16px;
-}
-
-.colorsSelect>* {
-  background-color: white;
-  color: var(--primary-color);
 }
 
 .buttons {
@@ -762,7 +758,8 @@ body {
   background-color: transparent;
 }
 
-.addToCart.active {
+.addToCart.active,
+.addToSaves.active {
   cursor: not-allowed;
   opacity: 0.5;
 }
@@ -873,6 +870,14 @@ body {
   cursor: pointer;
   opacity: 0;
   transition: var(--transition);
+}
+
+.scrollUp:hover {
+  background-color: var(--cards-background);
+}
+
+.scrollUp:hover::before {
+  border-color: var(--primary-color);
 }
 
 .scrollUp::before {
@@ -1148,6 +1153,15 @@ body {
 
 [data-search-inactive] {
   display: none !important;
+}
+
+select {
+  color: var(--text-color);
+  background-color: var(--cards-background);
+}
+
+option {
+  background-color: var(--cards-background);
 }
 
 @media (min-width: 651px) and (max-width: 1100px) {

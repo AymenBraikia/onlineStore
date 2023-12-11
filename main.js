@@ -303,6 +303,8 @@ fetch("https://web-store-server.aymenbraikia.repl.co/fetchData")
 
           if (parent.childNodes[2].childNodes[0].getAttribute("activated") == "true") document.querySelector(".addToCart").classList.add("active");
           else document.querySelector(".addToCart").classList.remove("active");
+          if (parent.childNodes[2].childNodes[2].getAttribute("activated") == "true") document.querySelector(".addToSaves").classList.add("active");
+          else document.querySelector(".addToSaves").classList.remove("active");
         };
         document.querySelector(".newContainer").appendChild(parent);
 
@@ -484,7 +486,7 @@ document.querySelector(".darkBg").onclick = (e) => {
     document.querySelector(".navBar").classList.remove("active");
 };
 
-document.querySelector(".addToCart").onclick = (e) => {
+document.querySelector(".addToCart").onclick = e => {
   addToCart({
     email: localStorage.getItem("email"),
     item: {
@@ -494,6 +496,25 @@ document.querySelector(".addToCart").onclick = (e) => {
       imageUrl: document.querySelector(".img").style.backgroundImage.slice(5, -2).replace("", ""),
     },
   });
+  document.querySelector(".addToCart").classList.add("active")
+  document.querySelectorAll(".itemImage").forEach(el => {
+    if (document.querySelector(".img").style.backgroundImage == el.style.backgroundImage) el.parentElement.childNodes[2].childNodes[0].classList.add("active")
+  })
+};
+document.querySelector(".addToSaves").onclick = e => {
+  addToSaved({
+    email: localStorage.getItem("email"),
+    item: {
+      name: document.querySelector(".name").innerHTML,
+      price: document.querySelector(".price").innerHTML,
+      color: document.querySelector(".colorsSelect").value,
+      imageUrl: document.querySelector(".img").style.backgroundImage.slice(5, -2).replace("", ""),
+    },
+  });
+  document.querySelector(".addToSaves").classList.add("active")
+  document.querySelectorAll(".itemImage").forEach(el => {
+    if (document.querySelector(".img").style.backgroundImage == el.style.backgroundImage) el.parentElement.childNodes[2].childNodes[2].classList.add("active")
+  })
 };
 document.onscroll = (e) => {
   if (scrollY >= (20 * innerHeight) / 100)

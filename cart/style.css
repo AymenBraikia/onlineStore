@@ -426,7 +426,7 @@ body {
 }
 
 .warning {
-    display: none;
+    display: flex;
     width: 400px;
     height: 250px;
     background: var(--cards-background);
@@ -434,7 +434,14 @@ body {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    z-index: -1;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.warning.active {
     z-index: 3;
+    opacity: 1;
 }
 
 .warningCont {
@@ -514,13 +521,20 @@ body {
 }
 
 .darkBg {
-    display: none;
+    display: flex;
     position: fixed;
     left: 0;
     top: 0;
     width: 100vw;
     height: 100vh;
     background-color: #000000ba;
+    z-index: -1;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.darkBg.active {
+    opacity: 1;
     z-index: 2;
 }
 
