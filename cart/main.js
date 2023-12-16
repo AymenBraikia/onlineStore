@@ -45,10 +45,13 @@ fetch("https://web-store-server.aymenbraikia.repl.co/cart", {
         checkbox.onclick = () => {
             if (checkbox.checked) {
                 document.querySelector(".value").innerHTML =
-                    // (+document.querySelector(".value").innerHTML + +checkbox.parentElement.parentElement.childNodes[3].innerText.slice(7, -2)).toFixed(2).toString() + "$";
                     (+document.querySelector(".value").innerHTML.slice(0, -1) + +checkbox.parentElement.parentElement.childNodes[3].innerText.slice(7, -2)).toFixed(2).toString() + "$"
+                document.querySelector(".submit").classList.add("active")
             }
-            else document.querySelector(".value").innerHTML = (+document.querySelector(".value").innerHTML.slice(0, -1) - +checkbox.parentElement.parentElement.childNodes[3].innerText.slice(7, -2)).toFixed(2).toString() + "$";
+            else {
+                document.querySelector(".value").innerHTML = (+document.querySelector(".value").innerHTML.slice(0, -1) - +checkbox.parentElement.parentElement.childNodes[3].innerText.slice(7, -2)).toFixed(2).toString() + "$";
+                if(document.querySelector(".value").innerHTML.slice(0,-1) <= 0) document.querySelector(".submit").classList.remove("active")
+            }
         };
 
         const image = document.createElement("div");
@@ -152,3 +155,142 @@ if (screen.availWidth <= 480) {
     document.querySelector(".search").innerHTML = "Cart"
 }
 document.querySelector(".logo").onclick = e => location.pathname = ""
+
+document.querySelector(".darkBg").onclick = e => {
+    document.querySelector(".warning").classList.remove("active")
+    document.querySelector(".darkBg").classList.remove("active")
+    document.querySelector(".payments").classList.remove("active")
+}
+
+document.querySelector(".submit").onclick = e => {
+    if (document.querySelector(".value").innerHTML.slice(0, -1) >= 0 && document.querySelector(".submit").classList.contains("active")) {
+        document.querySelector(".darkBg").classList.add("active")
+        document.querySelector(".payments").classList.add("active")
+        document.querySelector("#result-message").classList.add("active")
+        document.querySelector("#result-message").innerHTML = `You will pay: ${document.querySelector(".value").innerHTML}`
+    } else return
+}
+
+
+
+
+
+
+
+
+
+// payments
+window.paypal
+    .Buttons({
+        async createOrder() {
+            try {
+                document.querySelector("#result-message").classList.remove("active")
+                const response = await fetch("https://web-store-server.aymenbraikia.repl.co/api/orders", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    // use the "body" param to optionally pass additional order information
+                    // like product ids and quantities
+                    body: JSON.stringify({
+                        cart: [
+                            {
+                                id: "YOUR_PRODUCT_ID",
+                                quantity: "1",
+                                amount: {
+                                    "currency_code": "USD",
+                                    "value": document.querySelector(".value").innerText.slice(0, -1)
+                                }
+                            },
+                        ],
+                        "amount": {
+                            "currency_code": "USD",
+                            "value": document.querySelector(".value").innerText.slice(0, -1)
+                        }
+                    }),
+                });
+
+                const orderData = await response.json();
+
+                if (orderData.id) {
+                    return orderData.id;
+                } else {
+                    const errorDetail = orderData?.details?.[0];
+                    const errorMessage = errorDetail
+                        ? `${errorDetail.issue} ${errorDetail.description} (${orderData.debug_id})`
+                        : JSON.stringify(orderData);
+
+                    throw new Error(errorMessage);
+                }
+            } catch (error) {
+                console.error(error);
+                resultMessage(`Could not initiate PayPal Checkout...<br><br>${error}`);
+            }
+        },
+        async onApprove(data, actions) {
+            console.clear();
+            console.log(data, actions);
+            try {
+                const response = await fetch(`https://web-store-server.aymenbraikia.repl.co/api/orders/${data.orderID}/capture`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+
+                const orderData = await response.json();
+                // Three cases to handle:
+                //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
+                //   (2) Other non-recoverable errors -> Show a failure message
+                //   (3) Successful transaction -> Show confirmation or thank you message
+                console.clear()
+                console.log(orderData)
+
+                const errorDetail = orderData?.details?.[0];
+
+                console.log(errorDetail);
+
+                if (errorDetail?.issue === "INSTRUMENT_DECLINED") {
+                    // (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
+                    // recoverable state, per https://developer.paypal.com/docs/checkout/standard/customize/handle-funding-failures/
+                    return actions.restart();
+                } else if (errorDetail) {
+                    // (2) Other non-recoverable errors -> Show a failure message
+                    throw new Error(`${errorDetail.description} (${orderData.debug_id})`);
+                } else if (!orderData.purchase_units) {
+                    throw new Error(JSON.stringify(orderData));
+                } else {
+                    // (3) Successful transaction -> Show confirmation or thank you message
+                    // Or go to another URL:  actions.redirect('thank_you.html');
+                    const transaction =
+                        orderData?.purchase_units?.[0]?.payments?.captures?.[0] ||
+                        orderData?.purchase_units?.[0]?.payments?.authorizations?.[0];
+                    resultMessage(
+                        `Transaction ${transaction.status}: ${transaction.id}<br><br>See console for all available details`,
+                    );
+                    console.log(
+                        "Capture result",
+                        orderData,
+                        JSON.stringify(orderData, null, 2),
+                    );
+                }
+            } catch (error) {
+                console.error(error);
+                resultMessage(
+                    `Sorry, your transaction could not be processed...<br><br>${error}`,
+                );
+            }
+        },
+        async onCancel() {
+            document.querySelector("#result-message").classList.add("active")
+        }
+    })
+    .render("#paypal-button-container");
+
+// Example function to show a result to the user. Your site's UI library can be used instead.
+function resultMessage(message) {
+    const container = document.querySelector("#result-message");
+    container.innerHTML = message;
+}
+
+

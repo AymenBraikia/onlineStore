@@ -303,6 +303,7 @@ body {
     align-items: center;
     font-size: 18px;
     text-indent: 0;
+    opacity: 0.5;
     color: var(--text-color);
     cursor: pointer;
     transition: var(--transition);
@@ -313,6 +314,12 @@ body {
     border-color: var(--primary-color);
     color: var(--primary-color);
     border-radius: 0;
+    cursor: not-allowed;
+}
+
+.submit.active {
+    opacity: 1;
+    cursor: pointer !important;
 }
 
 .actions {
@@ -536,6 +543,51 @@ body {
 .darkBg.active {
     opacity: 1;
     z-index: 2;
+}
+
+.payments {
+    width: 430px;
+    height: fit-content;
+    min-height: 600px;
+    max-height: 90%;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #eee;
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    border-radius: var(--border-raduis);
+    opacity: 0;
+    z-index: -1;
+}
+
+.payments.active {
+    opacity: 1;
+    z-index: 5;
+}
+
+.payments>* {
+    width: 100%;
+}
+
+#paypal-button-container {
+    overflow-y: auto;
+}
+
+#result-message {
+    color: black;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    transition: var(--transition);
+}
+
+#result-message.active {
+    font-size: 40px;
 }
 
 @media (min-width:320px) and (max-width:480px) {
