@@ -546,7 +546,9 @@ body {
 }
 
 .payments {
-    width: 430px;
+    width: fit-content;
+    min-width: 300px;
+    max-width: 430px;
     height: fit-content;
     min-height: 600px;
     max-height: 90%;
@@ -709,5 +711,9 @@ body {
     .cBox:checked:after {
         content: '';
         left: 32%;
+    }
+
+    .payments {
+        width: 100%;
     }
 }
