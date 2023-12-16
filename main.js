@@ -719,7 +719,7 @@ function tabletMode() {
 }
 
 function mobileMode() {
-  if(document.querySelector(".navBar")) return
+  if (document.querySelector(".navBar")) return
   let appearence = document.querySelector(".appearence");
   let themes = document.querySelector(".themes");
   let setting = document.querySelector(".setting");
@@ -876,6 +876,21 @@ function mobileMode() {
 
   logoContainer.appendChild(logoMobile)
   document.body.appendChild(logoContainer)
+
+  let splash = document.createElement("div")
+  splash.classList.add("splash")
+
+  let splashLogo = document.createElement("div")
+  splashLogo.classList.add("splashLogo")
+
+  splash.appendChild(splashLogo)
+  document.body.appendChild(splash)
+  setTimeout(() => {
+    splashLogo.classList.add("active")
+  }, 2000);
+  setTimeout(() => {
+    splash.style.display = "none"
+  }, 3000);
 }
 
 function tabletMode() {
