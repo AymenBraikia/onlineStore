@@ -4,6 +4,9 @@ function hexToRgba(hex, alpha) {
     r = parseInt(hex.slice(1, 3), 16);
     g = parseInt(hex.slice(3, 5), 16);
     b = parseInt(hex.slice(5, 7), 16);
+    if (isNaN(b)) b = 0
+    if (isNaN(g)) g = 0
+    if (isNaN(r)) r = 0
 
     return `(${r},${g},${b},${alpha})`;
 }
@@ -50,7 +53,7 @@ fetch("https://web-store-server.aymenbraikia.repl.co/cart", {
             }
             else {
                 document.querySelector(".value").innerHTML = (+document.querySelector(".value").innerHTML.slice(0, -1) - +checkbox.parentElement.parentElement.childNodes[3].innerText.slice(7, -2)).toFixed(2).toString() + "$";
-                if(document.querySelector(".value").innerHTML.slice(0,-1) <= 0) document.querySelector(".submit").classList.remove("active")
+                if (document.querySelector(".value").innerHTML.slice(0, -1) <= 0) document.querySelector(".submit").classList.remove("active")
             }
         };
 

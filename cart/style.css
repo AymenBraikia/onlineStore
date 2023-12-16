@@ -547,10 +547,10 @@ body {
 
 .payments {
     width: fit-content;
-    min-width: 300px;
-    max-width: 430px;
+    min-width: 475px;
+    max-width: 499px;
     height: fit-content;
-    min-height: 600px;
+    min-height: 400px;
     max-height: 90%;
     position: fixed;
     left: 50%;
@@ -589,7 +589,7 @@ body {
 }
 
 #result-message.active {
-    font-size: 40px;
+    font-size: 30px;
 }
 
 @media (min-width:320px) and (max-width:480px) {
