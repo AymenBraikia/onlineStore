@@ -719,6 +719,7 @@ function tabletMode() {
 }
 
 function mobileMode() {
+  if(document.querySelector(".navBar")) return
   let appearence = document.querySelector(".appearence");
   let themes = document.querySelector(".themes");
   let setting = document.querySelector(".setting");
@@ -878,6 +879,7 @@ function mobileMode() {
 }
 
 function tabletMode() {
+  if (document.querySelector(".navBar")) return
   let appearence = document.querySelector(".appearence");
   let themes = document.querySelector(".themes");
   let setting = document.querySelector(".setting");
