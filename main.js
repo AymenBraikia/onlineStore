@@ -760,10 +760,11 @@ function main() {
   }
 
   function openNav() {
+    console.log(navBar);
     navBar.classList.add("active");
     darkBg.classList.add("active");
     swipe.classList.add("active");
-    darkBg.style.cssText = "width:25vw;left:75vw;";
+    deviceMode == "mobile" ? darkBg.style.cssText = "width:25vw;left:75vw;" : darkBg.style.cssText = "width:50vw;left:50vw;"
   }
   function closeNav() {
     navBar.classList.remove("active");
