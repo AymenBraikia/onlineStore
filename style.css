@@ -1226,7 +1226,7 @@ option {
   }
 
   .notification {
-    right: -150%;
+    right: -200%;
   }
 
   .navBar {
@@ -1242,8 +1242,8 @@ option {
     transition: var(--transition);
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 45% repeat(3, 15%);
-    row-gap: 1.6%;
+    grid-template-rows: 42% repeat(3, 14%);
+    row-gap: 2%;
     backdrop-filter: blur(10px);
   }
 
@@ -1592,7 +1592,7 @@ option {
   }
 
   .notification {
-    right: -150%;
+    right: -200%;
   }
 
   .navBar {
@@ -1608,8 +1608,7 @@ option {
     transition: var(--transition);
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 45% repeat(3, 15%);
-    row-gap: 1.6%;
+    grid-template-rows: 42% repeat(4, 14%);
     backdrop-filter: blur(10px);
   }
 

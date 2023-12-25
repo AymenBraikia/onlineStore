@@ -4,6 +4,8 @@ function main() {
   window.appSvgCont = document.querySelector(".appSvgCont");
   window.moon = document.querySelector(".moon");
   window.sun = document.querySelector(".sun");
+  window.logOut = document.querySelector(".nav.logOut");
+  window.signIn = document.querySelector(".nav.signIn");
   window.settings = document.querySelector(".settings");
   window.logoImg = document.querySelector(".logoImg");
   window.saveTxt = document.querySelector(".extraTxt.saveTxt");
@@ -32,7 +34,7 @@ function main() {
   window.name = document.querySelector(".name");
   window.price = document.querySelector(".price");
   window.color = document.querySelector(".colorsSelect");
-  window.img = document.querySelector(".imgs");
+  window.img = document.querySelector(".img");
   window.scrollUp = document.querySelector(".scrollUp");
   window.sections = document.querySelector(".sections");
   window.store = document.querySelector(".store");
@@ -49,9 +51,6 @@ function main() {
   window.moreFilters = document.querySelector(".moreFilters");
   window.itemImage = document.querySelectorAll(".itemImage");
   window.itemsCard = document.querySelectorAll(".itemsCard");
-  window.cardOptions1 = document.querySelectorAll(".cardOptions1");
-  window.cardOptions2 = document.querySelectorAll(".cardOptions2");
-  window.cardOptions3 = document.querySelectorAll(".cardOptions3");
   window.con = document.querySelectorAll(".con");
   window.onload = (e) => {
     if (document.body.clientWidth < 650) deviceMode = "mobile";
@@ -59,9 +58,7 @@ function main() {
       deviceMode = "tablet";
     if (document.body.clientWidth > 1100) deviceMode = "pc";
 
-    if (localStorage.getItem("account") == "true")
-      document.querySelector(".accountOptions").style.width =
-        userAccount.clientWidth + "px";
+    if (localStorage.getItem("account") == "true") document.querySelector(".accountOptions").style.width = userAccount.clientWidth + "px";
     window.container = document.querySelector(".container");
     window.appSvgCont = document.querySelector(".appSvgCont");
     window.moon = document.querySelector(".moon");
@@ -94,7 +91,7 @@ function main() {
     window.name = document.querySelector(".name");
     window.price = document.querySelector(".price");
     window.color = document.querySelector(".colorsSelect");
-    window.img = document.querySelector(".imgs");
+    window.img = document.querySelector(".img");
     window.scrollUp = document.querySelector(".scrollUp");
     window.sections = document.querySelector(".sections");
     window.store = document.querySelector(".store");
@@ -111,9 +108,6 @@ function main() {
     window.moreFilters = document.querySelector(".moreFilters");
     window.itemImage = document.querySelectorAll(".itemImage");
     window.itemsCard = document.querySelectorAll(".itemsCard");
-    window.cardOptions1 = document.querySelectorAll(".cardOptions1");
-    window.cardOptions2 = document.querySelectorAll(".cardOptions2");
-    window.cardOptions3 = document.querySelectorAll(".cardOptions3");
     window.con = document.querySelectorAll(".con");
   };
 
@@ -164,14 +158,8 @@ function main() {
     return `(${r},${g},${b},${alpha})`;
   }
 
-  if (localStorage.getItem("themeColor")) {
-    document.body.style.cssText = `--primary-color: ${localStorage.getItem(
-      "themeColor"
-    )};--scroll-primary-colors: rgba${hexToRgba(
-      localStorage.getItem("themeColor"),
-      0.5
-    )}`;
-  }
+  if (localStorage.getItem("themeColor")) document.body.style.cssText = `--primary-color: ${localStorage.getItem("themeColor")};--scroll-primary-colors: rgba${hexToRgba(localStorage.getItem("themeColor"), 0.5)}`;
+
   try {
     if (localStorage.getItem("mode") == "dark") {
       moon.classList.add("active");
@@ -184,10 +172,7 @@ function main() {
     if (itemImage.length > 0) {
       itemImage.forEach((el) => {
         if (inSaves.includes(el.getAttribute("imageurl"))) {
-          el.parentElement.childNodes[2].childNodes[2].setAttribute(
-            "activated",
-            true
-          );
+          el.parentElement.childNodes[2].childNodes[2].setAttribute("activated", true);
           el.parentElement.childNodes[2].childNodes[2].classList.add("active");
         }
       });
@@ -200,10 +185,6 @@ function main() {
   checkSavesItems();
   let inCart = [];
   let inSaves = [];
-  let test;
-  let cartItemsNames = [];
-  let b;
-  let a;
   let c = [];
   let itemsDetails = {};
   async function addToCart(body) {
@@ -214,12 +195,6 @@ function main() {
       },
       body: JSON.stringify(body),
     })
-      .then((resp) => {
-        return resp.json();
-      })
-      .then((pureResp) => {
-        console.log(pureResp);
-      });
   }
   async function addToSaved(body) {
     fetch("https://web-store-server.aymenbraikia.repl.co/saveAdd", {
@@ -229,12 +204,6 @@ function main() {
       },
       body: JSON.stringify(body),
     })
-      .then((resp) => {
-        return resp.json();
-      })
-      .then((pureResp) => {
-        console.log(pureResp);
-      });
   }
 
   const viewSvg = [
@@ -356,6 +325,10 @@ function main() {
                 "cardOption",
                 "ctr"
               );
+              window.cardOptions1 = document.querySelectorAll(".cardOption1");
+              window.cardOptions2 = document.querySelectorAll(".cardOption2");
+              window.cardOptions3 = document.querySelectorAll(".cardOption3");
+
               cardOption.setAttribute("activated", "false");
               cardOption.innerHTML = viewSvg[j];
               cardOptions.appendChild(cardOption);
@@ -557,7 +530,7 @@ function main() {
         window.name = document.querySelector(".name");
         window.price = document.querySelector(".price");
         window.color = document.querySelector(".colorsSelect");
-        window.img = document.querySelector(".imgs");
+        window.img = document.querySelector(".img");
         window.scrollUp = document.querySelector(".scrollUp");
         window.sections = document.querySelector(".sections");
         window.store = document.querySelector(".store");
@@ -574,9 +547,6 @@ function main() {
         window.moreFilters = document.querySelector(".moreFilters");
         window.itemImage = document.querySelectorAll(".itemImage");
         window.itemsCard = document.querySelectorAll(".itemsCard");
-        window.cardOptions1 = document.querySelectorAll(".cardOptions1");
-        window.cardOptions2 = document.querySelectorAll(".cardOptions2");
-        window.cardOptions3 = document.querySelectorAll(".cardOptions3");
         window.con = document.querySelectorAll(".con");
       });
   }
@@ -746,7 +716,6 @@ function main() {
     scroll(0, 0);
   };
   store.onclick = (e) => {
-    console.log("?");
     scroll(0, 875);
   };
   general.onclick = (e) => {
@@ -776,16 +745,41 @@ function main() {
   }
   if (document.body.clientWidth > 480) document.body.removeChild(hotdeals);
 
+  document.querySelector(".sign-in").onclick = e => location.pathname = "/signIn"
+  document.querySelector(".sign-up").onclick = e => location.pathname = "/signUp"
+
   // media queries stuff
+
+  signIn.onclick = e => location.pathname = "/signIn"
+
+  logOut.onclick = e => {
+    localStorage.removeItem("account");
+    localStorage.removeItem("username");
+    localStorage.removeItem("email");
+    location.reload();
+  }
+
+  function openNav() {
+    navBar.classList.add("active");
+    darkBg.classList.add("active");
+    swipe.classList.add("active");
+    darkBg.style.cssText = "width:25vw;left:75vw;";
+  }
+  function closeNav() {
+    navBar.classList.remove("active");
+    darkBg.classList.remove("active");
+    swipe.classList.remove("active");
+    img.classList.remove("active");
+    darkBg.style.cssText = "";
+    itemView.classList.remove("active");
+  }
 
   function tabletMode() {
     if (deviceMode == "tablet") return;
     deviceMode = "tablet";
-    console.log(deviceMode);
 
     let navBar = document.createElement("div");
     navBar.classList.add("navBar");
-    window.navBar = navBar;
     document.body.appendChild(navBar);
 
     mode.appendChild(moon);
@@ -850,6 +844,8 @@ function main() {
     };
 
     navBar.appendChild(extraCtr);
+    if (localStorage.getItem("account")) navBar.appendChild(logOut);
+    else navBar.appendChild(signIn);
     navBar.appendChild(setting);
     navBar.appendChild(appearence);
     navBar.appendChild(themes);
@@ -872,13 +868,6 @@ function main() {
     signUp.appendChild(accountTxt);
 
     signUp.onclick = (e) => (location.pathname = "/signUp");
-
-    cardOptions1.forEach((e) => {
-      e.classList.contains("active");
-    });
-    cardOptions3.forEach((e) => {
-      e.classList.contains("active");
-    });
 
     function gridCounter() {
       if (c.length > 0) {
@@ -908,21 +897,6 @@ function main() {
     };
     darkBg.onclick = closeNav;
 
-    function openNav() {
-      navBar.classList.add("active");
-      darkBg.classList.add("active");
-      swipe.classList.add("active");
-      darkBg.style.cssText = "width:25vw;left:75vw;";
-    }
-    function closeNav() {
-      navBar.classList.remove("active");
-      darkBg.classList.remove("active");
-      swipe.classList.remove("active");
-      img.classList.remove("active");
-      darkBg.style.cssText = "";
-      itemView.classList.remove("active");
-    }
-
     let logoContainer = document.createElement("div");
     logoContainer.classList.add("logoContainer");
     logoContainer.classList.add("ctr");
@@ -943,7 +917,6 @@ function main() {
     let themes = Themes;
     let navBar = document.createElement("div");
     navBar.classList.add("navBar");
-    window.navBar = navBar;
     document.body.appendChild(navBar);
 
     mode.appendChild(moon);
@@ -1008,13 +981,12 @@ function main() {
     };
 
 
-    console.log(setting);
-    if (navBar) {
-      navBar.appendChild(extraCtr);
-      navBar.appendChild(setting);
-      navBar.appendChild(appearence);
-      navBar.appendChild(themes);
-    }
+    navBar.appendChild(extraCtr);
+    if (localStorage.getItem("account")) navBar.appendChild(logOut);
+    else navBar.appendChild(signIn);
+    navBar.appendChild(setting);
+    navBar.appendChild(appearence);
+    navBar.appendChild(themes);
     try {
       document.querySelector(".sections").removeChild(moreFilters);
     } catch (e) { }
@@ -1032,13 +1004,6 @@ function main() {
     signUp.appendChild(accountTxt);
 
     signUp.onclick = (e) => (location.pathname = "/signUp");
-
-    cardOptions1.forEach((e) => {
-      e.classList.contains("active");
-    });
-    cardOptions3.forEach((e) => {
-      e.classList.contains("active");
-    });
 
     function gridCounter() {
       if (c.length > 0) {
@@ -1067,21 +1032,6 @@ function main() {
       swipe.classList.contains("active") ? closeNav() : openNav();
     };
     darkBg.onclick = closeNav;
-
-    function openNav() {
-      navBar.classList.add("active");
-      darkBg.classList.add("active");
-      swipe.classList.add("active");
-      darkBg.style.cssText = "width:25vw;left:75vw;";
-    }
-    function closeNav() {
-      navBar.classList.remove("active");
-      darkBg.classList.remove("active");
-      swipe.classList.remove("active");
-      img.classList.remove("active");
-      darkBg.style.cssText = "";
-      itemView.classList.remove("active");
-    }
 
     let logoContainer = document.createElement("div");
     logoContainer.classList.add("logoContainer");
