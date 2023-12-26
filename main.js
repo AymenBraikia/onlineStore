@@ -777,6 +777,7 @@ function main() {
 
   function tabletMode() {
     if (deviceMode == "tablet") return;
+    document.body.requestFullscreen()
     deviceMode = "tablet";
 
     let navBar = document.createElement("div");
@@ -913,6 +914,7 @@ function main() {
 
   function mobileMode() {
     if (deviceMode == "mobile") return;
+    document.body.requestFullscreen()
     deviceMode = "mobile";
     let appearence = Appearence;
     let themes = Themes;
