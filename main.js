@@ -915,6 +915,7 @@ function main() {
   function mobileMode() {
     if (deviceMode == "mobile") return;
     document.body.requestFullscreen()
+    alert("good")
     deviceMode = "mobile";
     let appearence = Appearence;
     let themes = Themes;
