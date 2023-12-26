@@ -42,7 +42,7 @@ function main() {
   window.contact = document.querySelector(".contact.ctr");
   window.contactContainer = document.querySelector(".contactContainer");
   window.notificationText = document.querySelector(".notificationText");
-  window.notification = document.querySelector(".notification");
+  window.notificatioN = document.querySelector(".notification");
   window.hotdeals = document.querySelector(".hotDeals");
   window.setting = document.querySelector(".setting");
   window.mode = document.querySelector(".mode");
@@ -54,8 +54,7 @@ function main() {
   window.con = document.querySelectorAll(".con");
   window.onload = (e) => {
     if (document.body.clientWidth < 650) deviceMode = "mobile";
-    if (document.body.clientWidth > 650 && document.body.clientWidth < 1100)
-      deviceMode = "tablet";
+    if (document.body.clientWidth > 650 && document.body.clientWidth < 1100) deviceMode = "tablet";
     if (document.body.clientWidth > 1100) deviceMode = "pc";
 
     if (localStorage.getItem("account") == "true") document.querySelector(".accountOptions").style.width = userAccount.clientWidth + "px";
@@ -99,7 +98,7 @@ function main() {
     window.contact = document.querySelector(".contact.ctr");
     window.contactContainer = document.querySelector(".contactContainer");
     window.notificationText = document.querySelector(".notificationText");
-    window.notification = document.querySelector(".notification");
+    window.notificatioN = document.querySelector(".notification");
     window.hotdeals = document.querySelector(".hotDeals");
     window.setting = document.querySelector(".setting");
     window.mode = document.querySelector(".mode");
@@ -111,7 +110,7 @@ function main() {
     window.con = document.querySelectorAll(".con");
   };
 
-  let splash = document.createElement("div");
+  window.splash = document.createElement("div");
   splash.classList.add("splash");
 
   let splashLogo = document.createElement("div");
@@ -125,8 +124,8 @@ function main() {
     }, 1500);
     setTimeout(() => {
       splash.style.display = "none";
+      if (document.querySelector(".splash")) document.body.removeChild(splash);
     }, 2500);
-    if (document.querySelector(".splash")) document.body.removeChild(splash);
   }
   hideSplash();
 
@@ -538,7 +537,7 @@ function main() {
         window.contact = document.querySelector(".contact.ctr");
         window.contactContainer = document.querySelector(".contactContainer");
         window.notificationText = document.querySelector(".notificationText");
-        window.notification = document.querySelector(".notification");
+        window.notificatioN = document.querySelector(".notification");
         window.hotdeals = document.querySelector(".hotDeals");
         window.setting = document.querySelector(".setting");
         window.mode = document.querySelector(".mode");
@@ -738,9 +737,9 @@ function main() {
 
   function notification(msg) {
     notificationText.innerHTML = msg;
-    notification.classList.add("active");
+    notificatioN.classList.add("active");
     setTimeout(() => {
-      notification.classList.remove("active");
+      notificatioN.classList.remove("active");
     }, 3000);
   }
   if (document.body.clientWidth > 480) document.body.removeChild(hotdeals);
@@ -1045,7 +1044,6 @@ function main() {
 
     logoContainer.appendChild(logoMobile);
     document.body.appendChild(logoContainer);
-    phoneBody = document.body.cloneNode(true);
   }
 
   function pcMode() {

@@ -172,9 +172,36 @@ app.post("/savesRemove", async (req, res) => {
     });
 });
 
-
 // log/sign via facebook
 
+const passport = require("passport")
+const FacebookStrategy = require("passport-facebook").Strategy
+
+const FACEBOOK_APP_ID = "766145508890878"
+const FACEBOOK_APP_SECRET = "d1a761e846d7b5c26537a67fc163c1ed"
+
+passport.use(new FacebookStrategy({
+    clientID: FACEBOOK_APP_ID,
+    clientSecret: FACEBOOK_APP_SECRET,
+    callbackURL: "http://localhost:5500/auth/facebook/callback"
+},
+    function (accessToken, refreshToken, profile, cb) {
+        User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+            return cb(err, user);
+        });
+    }
+));
+
+
+app.get('/auth/facebook',
+    passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { failureRedirect: '/login' }),
+    function (req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/');
+    });
 
 // paypal
 const generateAccessToken = async () => {
